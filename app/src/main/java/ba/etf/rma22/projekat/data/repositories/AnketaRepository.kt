@@ -14,9 +14,9 @@ object AnketaRepository {
         return ankete()
     }
 
-    /*fun getMyAnkete(): List<Anketa> {
-
-    }*/
+    fun getMyAnkete(): List<Anketa> {
+        return emptyList()
+    }
 
     fun getDone(): List<Anketa> {
         return ankete().filter { anketa -> dajStatus(anketa)=="plava" }.toList()
@@ -28,7 +28,7 @@ object AnketaRepository {
     }
 
     fun getNotTaken(): List<Anketa> {
-        return ankete().filter { anketa -> dajStatus(anketa) == "zuta" }.toList()
+        return ankete().filter { anketa -> dajStatus(anketa) == "crvena" }.toList()
     }
 
     private fun dajStatus(anketa: Anketa): String {

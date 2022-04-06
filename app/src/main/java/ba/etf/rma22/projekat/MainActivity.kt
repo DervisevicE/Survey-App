@@ -3,6 +3,8 @@ package ba.etf.rma22.projekat
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.recyclerview.widget.GridLayoutManager
@@ -38,6 +40,26 @@ class MainActivity : AppCompatActivity() {
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spiner.adapter = adapter
+        }
+
+        spiner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                if(spiner.selectedItem.toString()=="Sve moje ankete")
+                    sveAnketeAdapter.updateAnkete(anketaListViewModel.getMyAnkete())
+                else if(spiner.selectedItem.toString()=="Sve ankete")
+                    sveAnketeAdapter.updateAnkete(anketaListViewModel.getAnkete())
+                else if(spiner.selectedItem.toString()=="Urađene ankete")
+                    sveAnketeAdapter.updateAnkete(anketaListViewModel.getDone())
+                else if(spiner.selectedItem.toString()=="Buduće ankete")
+                    sveAnketeAdapter.updateAnkete(anketaListViewModel.getFuture())
+                else
+                    sveAnketeAdapter.updateAnkete(anketaListViewModel.getNotTaken())
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
         }
 
         dugme = findViewById(R.id.upisDugme)
