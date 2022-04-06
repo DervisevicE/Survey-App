@@ -7,13 +7,13 @@ fun istrazivanja(): List<Istrazivanje>{
     val godina: Int*/
 
     return listOf(
-        Istrazivanje("Istrazivanje broj 1", 2021),
-        Istrazivanje("Istrazivanje broj 2",2021),
-        Istrazivanje("Istrazivanje broj 3", 2022),
-        Istrazivanje("Istrazivanje broj 4",2023),
-        Istrazivanje("Istrazivanje broj 5",2022),
-        Istrazivanje("Istrazivanje broj 6",2022),
-        Istrazivanje("Istrazivanje broj 7",2021)
+        Istrazivanje("Istrazivanje broj 1", 1),
+        Istrazivanje("Istrazivanje broj 2",1),
+        Istrazivanje("Istrazivanje broj 3", 2),
+        Istrazivanje("Istrazivanje broj 4",3),
+        Istrazivanje("Istrazivanje broj 5",2),
+        Istrazivanje("Istrazivanje broj 6",2),
+        Istrazivanje("Istrazivanje broj 7",1)
     )
 
 }

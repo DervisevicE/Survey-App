@@ -5,7 +5,7 @@ import ba.etf.rma22.projekat.data.models.Istrazivanje
 
 object IstrazivanjeRepository {
 
-    fun getIstrazivaneByGodina(godina: Int) : List<Istrazivanje>{
+    fun getIstrazivanjeByGodina(godina: Int) : List<Istrazivanje>{
         return istrazivanja().filter { istrazivanje -> istrazivanje.godina==godina  }.toList()
     }
 
