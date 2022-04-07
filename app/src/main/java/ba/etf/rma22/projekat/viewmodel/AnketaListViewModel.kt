@@ -5,6 +5,7 @@ import ba.etf.rma22.projekat.data.models.Anketa
 import ba.etf.rma22.projekat.data.repositories.AnketaRepository
 
 class AnketaListViewModel {
+
     fun getAnkete() : List<Anketa>{
         return AnketaRepository.getAnkete();
     }

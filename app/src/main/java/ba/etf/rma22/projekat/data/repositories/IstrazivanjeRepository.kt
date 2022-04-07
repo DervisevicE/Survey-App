@@ -5,6 +5,21 @@ import ba.etf.rma22.projekat.data.models.Istrazivanje
 
 object IstrazivanjeRepository {
 
+    private var upisani: MutableList<Istrazivanje>
+    init {
+        upisani = mutableListOf()
+        upisani.add(izdvojiIstrazivanje("Moje istrazivanje",1))
+    }
+
+    fun izdvojiIstrazivanje(naziv: String, godina: Int): Istrazivanje{
+        return getAll().filter { istrazivanje -> istrazivanje.naziv==naziv && istrazivanje.godina==godina }.first()
+
+    }
+
+    fun dodajUMojaIstrazivanja(istrazivanje: String, godina: Int): Unit {
+        upisani.add(izdvojiIstrazivanje(istrazivanje, godina))
+    }
+
     fun getIstrazivanjeByGodina(godina: Int) : List<Istrazivanje>{
         return istrazivanja().filter { istrazivanje -> istrazivanje.godina==godina  }.toList()
     }
@@ -14,6 +29,8 @@ object IstrazivanjeRepository {
     }
 
     fun getUpisani(): List<Istrazivanje>{
-        return emptyList()
+        if(upisani.size==0)
+            return emptyList()
+        return upisani
     }
 }

@@ -28,6 +28,7 @@ class UpisIstrazivanje: AppCompatActivity() {
         odabirGodina = findViewById(R.id.odabirGodina)
         odabirIstrazivanja = findViewById(R.id.odabirIstrazivanja)
         odabirGrupa = findViewById(R.id.odabirGrupa)
+        upisDugme = findViewById(R.id.dodajIstrazivanjeDugme)
 
         ArrayAdapter.createFromResource(
             this,
@@ -46,9 +47,14 @@ class UpisIstrazivanje: AppCompatActivity() {
                     odabirIstrazivanja.isEnabled=false
                     odabirGrupa.isEnabled=false
                     upisDugme.isEnabled=false
+                    return;
                 }
+                updateGrupa(odabirGrupa)
+                postaviFunkcionalnostDugmica()
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
+                updateIstrazivanja(odabirIstrazivanja)
+                updateGrupa(odabirGrupa)
             }
         }
 
@@ -59,20 +65,27 @@ class UpisIstrazivanje: AppCompatActivity() {
                     updateGrupa(odabirGrupa)
                 } else {
                     odabirGrupa.isEnabled=false
+                    //upisDugme.isEnabled=false
                 }
+                postaviFunkcionalnostDugmica()
             }
-
             override fun onNothingSelected(p0: AdapterView<*>?) {
+                updateGrupa(odabirGrupa)
+                //upisDugme.isEnabled=false
 
             }
-
         }
 
-
-
-
-
-
+        odabirGrupa.onItemSelectedListener= object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                postaviFunkcionalnostDugmica()
+                /*if(odabirGrupa.selectedItem.toString()!="")
+                    upisDugme.isEnabled=true*/
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                //upisDugme.isEnabled=false
+            }
+        }
     }
 
     private fun updateGrupa(spinner: Spinner) {
@@ -86,7 +99,6 @@ class UpisIstrazivanje: AppCompatActivity() {
         spinner.adapter=adapter
     }
 
-
     private fun updateIstrazivanja(spinner: Spinner) {
         val istrazivanjaPoGodini = istrazivanjeViewModel.getIstrazivanjeByGodina(odabirGodina.selectedItem.toString().toInt())
         val adapter = ArrayAdapter(
@@ -96,5 +108,11 @@ class UpisIstrazivanje: AppCompatActivity() {
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter=adapter
+    }
+
+    private fun postaviFunkcionalnostDugmica(){
+        upisDugme.isEnabled = odabirGodina.selectedItem.toString() != ""
+                && odabirIstrazivanja.selectedItem.toString() != ""
+                && odabirGrupa.selectedItem.toString() != ""
     }
 }

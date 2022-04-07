@@ -13,7 +13,8 @@ fun istrazivanja(): List<Istrazivanje>{
         Istrazivanje("Istrazivanje broj 4",3),
         Istrazivanje("Istrazivanje broj 5",2),
         Istrazivanje("Istrazivanje broj 6",2),
-        Istrazivanje("Istrazivanje broj 7",1)
+        Istrazivanje("Istrazivanje broj 7",1),
+        Istrazivanje("Moje istrazivanje",1)
     )
 
 }

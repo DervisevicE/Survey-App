@@ -107,6 +107,9 @@ fun ankete(): List<Anketa>{
 
         Anketa("Anketa 8", "Istrazivanje broj 1", datum1, datum9,null,10, "G6", 0.11F),
 
-        Anketa("Anketa 10", "Istrazivanje broj 1", datum1, datum11,null,10, "G5", 0.12F)
+        Anketa("Anketa 10", "Istrazivanje broj 1", datum1, datum11,null,10, "G5", 0.12F),
+
+        Anketa("Moja anekta", "Moje istrazivanje", datum5, datum4, datum6,10, "G1",1F)
+
     )
 }

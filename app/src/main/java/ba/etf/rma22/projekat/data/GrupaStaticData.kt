@@ -36,5 +36,6 @@ fun grupe(): List<Grupa>{
         Grupa("G2","Istrazivanje broj 7"),
         Grupa("G5","Istrazivanje broj 7"),
 
+        Grupa("G1", "Moje istrazivanje")
         )
 }
