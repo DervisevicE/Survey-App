@@ -17,4 +17,8 @@ class IstrazivanjeViewModel {
     fun getUpisani(): List<Istrazivanje>{
         return IstrazivanjeRepository.getUpisani()
     }
+
+    fun dodajUMojaIstrazivanja(istrazivanje: String, godina: Int): Unit {
+        IstrazivanjeRepository.dodajUMojaIstrazivanja(istrazivanje,godina)
+    }
 }

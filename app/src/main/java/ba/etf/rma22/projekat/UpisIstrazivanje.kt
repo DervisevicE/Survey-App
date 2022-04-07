@@ -8,6 +8,7 @@ import ba.etf.rma22.projekat.data.istrazivanja
 import ba.etf.rma22.projekat.data.models.Anketa
 import ba.etf.rma22.projekat.data.models.Istrazivanje
 import ba.etf.rma22.projekat.data.repositories.IstrazivanjeRepository
+import ba.etf.rma22.projekat.viewmodel.AnketaListViewModel
 import ba.etf.rma22.projekat.viewmodel.GrupaViewModel
 import ba.etf.rma22.projekat.viewmodel.IstrazivanjeViewModel
 import java.util.stream.Collectors
@@ -20,6 +21,7 @@ class UpisIstrazivanje: AppCompatActivity() {
     private lateinit var upisDugme: Button
     private var istrazivanjeViewModel = IstrazivanjeViewModel()
     private var grupaViewModel = GrupaViewModel()
+    private var anketaViewModel = AnketaListViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,6 +87,12 @@ class UpisIstrazivanje: AppCompatActivity() {
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 //upisDugme.isEnabled=false
             }
+        }
+
+        upisDugme.setOnClickListener{
+            anketaViewModel.dodajUMojeAnkete(odabirIstrazivanja.selectedItem.toString(),odabirGrupa.selectedItem.toString())
+            istrazivanjeViewModel.dodajUMojaIstrazivanja(odabirIstrazivanja.selectedItem.toString(),odabirGodina.selectedItem.toString().toInt())
+            this.finish()
         }
     }
 

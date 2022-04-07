@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ba.etf.rma22.projekat.data.models.Anketa
 import ba.etf.rma22.projekat.view.AnketeListAdapater
 import ba.etf.rma22.projekat.viewmodel.AnketaListViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -44,10 +45,10 @@ class MainActivity : AppCompatActivity() {
 
         spiner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if(spiner.selectedItem.toString()=="Sve moje ankete")
-                    sveAnketeAdapter.updateAnkete(anketaListViewModel.getMyAnkete())
-                else if(spiner.selectedItem.toString()=="Sve ankete")
+                if(spiner.selectedItem.toString()=="Sve ankete")
                     sveAnketeAdapter.updateAnkete(anketaListViewModel.getAnkete())
+                else if(spiner.selectedItem.toString()=="Sve moje ankete")
+                    sveAnketeAdapter.updateAnkete(anketaListViewModel.getMyAnkete())
                 else if(spiner.selectedItem.toString()=="Urađene ankete")
                     sveAnketeAdapter.updateAnkete(anketaListViewModel.getDone())
                 else if(spiner.selectedItem.toString()=="Buduće ankete")
@@ -59,11 +60,12 @@ class MainActivity : AppCompatActivity() {
             override fun onNothingSelected(p0: AdapterView<*>?) {
 
             }
-
         }
 
         dugme = findViewById(R.id.upisDugme)
         dugme.setOnClickListener { showUpisIstrazivanje() }
+
+
 
     }
 

@@ -36,6 +36,36 @@ fun grupe(): List<Grupa>{
         Grupa("G2","Istrazivanje broj 7"),
         Grupa("G5","Istrazivanje broj 7"),
 
-        Grupa("G1", "Moje istrazivanje")
+        Grupa("G1", "Moje istrazivanje"),
+
+        Grupa("G1", "Istrazivanje broj 8"),
+        Grupa("G2","Istrazivanje broj 8"),
+        Grupa("G3","Istrazivanje broj 8"),
+
+        Grupa("G4", "Istrazivanje broj 9"),
+        Grupa("G5","Istrazivanje broj 9"),
+        Grupa("G6","Istrazivanje broj 9"),
+
+        Grupa("G6", "Istrazivanje broj 10"),
+        Grupa("G4","Istrazivanje broj 10"),
+        Grupa("G4","Istrazivanje broj 10"),
+
+        Grupa("G3", "Istrazivanje broj 11"),
+        Grupa("G2","Istrazivanje broj 11"),
+        Grupa("G6","Istrazivanje broj 11"),
+
+        Grupa("G1", "Istrazivanje broj 12"),
+        Grupa("G2","Istrazivanje broj 12"),
+        Grupa("G5","Istrazivanje broj 12"),
+
+        Grupa("G1", "Istrazivanje broj 13"),
+        Grupa("G6","Istrazivanje broj 13"),
+        Grupa("G3","Istrazivanje broj 13"),
+
+        Grupa("G2", "Istrazivanje broj 14"),
+        Grupa("G3","Istrazivanje broj 14"),
+        Grupa("G6","Istrazivanje broj 14"),
+
+
         )
 }

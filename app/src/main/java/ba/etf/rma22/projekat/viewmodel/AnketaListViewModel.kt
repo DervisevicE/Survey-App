@@ -26,6 +26,10 @@ class AnketaListViewModel {
         return AnketaRepository.getNotTaken()
     }
 
+    fun dodajUMojeAnkete(istrazivanje: String, grupa: String): Unit {
+        AnketaRepository.dodajUMojeAnkete(istrazivanje,grupa)
+    }
+
 
 
 }
