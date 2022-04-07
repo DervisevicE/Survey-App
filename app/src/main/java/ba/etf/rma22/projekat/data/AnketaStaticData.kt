@@ -81,7 +81,6 @@ fun ankete(): List<Anketa>{
 
         Anketa("Anketa 5", "Istrazivanje broj 3", datum12, datum10,null,10, "G3", 0.3F),
 
-
         Anketa("Anketa 6", "Istrazivanje broj 1", datum13, datum11,null,10, "G3", 0.1F),
 
         Anketa("Anketa 7", "Istrazivanje broj 5", datum2, datum10,null,10, "G2", 0.43F),
@@ -95,8 +94,8 @@ fun ankete(): List<Anketa>{
         Anketa("Anketa 10", "Istrazivanje broj 2", datum16, datum15,null,10, "G4", 0.2F),
 
         Anketa("Anketa 10", "Istrazivanje broj 2", datum16, datum15,null,10, "G5", 0.2F),
-        Anketa("Anketa 10", "Istrazivanje broj 2", datum16, datum15,null,10, "G6", 0.2F),
 
+        Anketa("Anketa 10", "Istrazivanje broj 2", datum16, datum15,null,10, "G6", 0.2F),
 
         Anketa("Anketa 1", "Istrazivanje broj 5", datum1, datum2,null,10, "G5", 0.8F),
 

@@ -2,11 +2,11 @@
     <string name="app_name">RMA22P18923</string>
 
     <string-array name="vrijednostiZaSpinner">
-        <item>Sve ankete</item>
         <item>Sve moje ankete</item>
+        <item>Sve ankete</item>
         <item>Urađene ankete</item>
         <item>Buduće ankete</item>
-        <item>Neurađene ankete</item>
+        <item>Prošle ankete</item>
     </string-array>
 
     <string-array name="godine">
