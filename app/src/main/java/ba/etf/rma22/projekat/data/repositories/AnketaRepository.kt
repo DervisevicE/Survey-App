@@ -42,15 +42,15 @@ object AnketaRepository {
         }
 
         fun getDone(): List<Anketa> {
-            return ankete().filter { anketa -> dajStatus(anketa) == "plava" }.toList()
+            return mojeAnkete.filter { anketa -> dajStatus(anketa) == "plava" }.ifEmpty { emptyList() }
         }
 
         fun getFuture(): List<Anketa> {
-            return ankete().filter { anketa -> dajStatus(anketa) == "zuta" }.toList()
+            return mojeAnkete.filter { anketa -> dajStatus(anketa) == "zuta" }.ifEmpty { emptyList() }
         }
 
         fun getNotTaken(): List<Anketa> {
-            return ankete().filter { anketa -> dajStatus(anketa) == "crvena" }.toList()
+            return mojeAnkete.filter { anketa -> dajStatus(anketa) == "crvena" }.ifEmpty { emptyList() }
         }
 
         private fun dajStatus(anketa: Anketa): String {

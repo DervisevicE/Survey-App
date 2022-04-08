@@ -34,6 +34,7 @@ class AnketeListAdapater(
         return AnketeViewHolder(view)
     }
 
+
     override fun onBindViewHolder(holder: AnketeViewHolder, position: Int) {
         holder.anketaName.text = ankete[position].naziv
         holder.istrazivanjeName.text = ankete[position].nazivIstrazivanja

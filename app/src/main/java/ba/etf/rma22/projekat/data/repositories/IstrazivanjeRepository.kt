@@ -16,7 +16,7 @@ object IstrazivanjeRepository {
 
     }
 
-    fun dodajUMojaIstrazivanja(istrazivanje: String, godina: Int): Unit {
+    fun dodajUMojaIstrazivanja(istrazivanje: String, godina: Int) {
         upisani.add(izdvojiIstrazivanje(istrazivanje, godina))
     }
 

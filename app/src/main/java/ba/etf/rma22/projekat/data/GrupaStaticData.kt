@@ -48,7 +48,6 @@ fun grupe(): List<Grupa>{
 
         Grupa("G6", "Istrazivanje broj 10"),
         Grupa("G4","Istrazivanje broj 10"),
-        Grupa("G4","Istrazivanje broj 10"),
 
         Grupa("G3", "Istrazivanje broj 11"),
         Grupa("G2","Istrazivanje broj 11"),
