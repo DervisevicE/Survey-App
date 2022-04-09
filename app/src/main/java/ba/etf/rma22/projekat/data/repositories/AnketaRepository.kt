@@ -25,6 +25,11 @@ object AnketaRepository {
     init {
         mojeAnkete = mutableListOf()
         mojeAnkete.add(izdvojiAnketu("Moje istrazivanje", "G1"))
+        mojeAnkete.add(izdvojiAnketu("Istrazivanje broj 6", "G1"))
+        mojeAnkete.add(izdvojiAnketu("Istrazivanje broj 6", "G4"))
+        mojeAnkete.add(izdvojiAnketu("Istrazivanje broj 3", "G3"))
+        mojeAnkete.add(izdvojiAnketu("Istrazivanje broj 3", "G1"))
+
     }
 
         fun getAnkete(): List<Anketa> {

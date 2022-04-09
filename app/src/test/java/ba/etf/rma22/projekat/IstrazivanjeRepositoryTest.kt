@@ -13,6 +13,30 @@ import org.junit.Test
 class IstrazivanjeRepositoryTest {
 
     @Test
+    fun upisanaIstrazivanja(){
+        val istrazivanja = IstrazivanjeRepository.getUpisani()
+        assertEquals(istrazivanja.size,5)
+        assertThat(istrazivanja, hasItem<Istrazivanje>(hasProperty("naziv",Is("Moje istrazivanje"))))
+        assertThat(istrazivanja, hasItem<Istrazivanje>(hasProperty("godina", Is(1))))
+
+        assertThat(istrazivanja, hasItem<Istrazivanje>(hasProperty("naziv",Is("Istrazivanje broj 6"))))
+        assertThat(istrazivanja, hasItem<Istrazivanje>(hasProperty("godina", Is(2))))
+
+        assertThat(istrazivanja, hasItem<Istrazivanje>(hasProperty("naziv",Is("Istrazivanje broj 6"))))
+        assertThat(istrazivanja, hasItem<Istrazivanje>(hasProperty("godina", Is(2))))
+
+        assertThat(istrazivanja, hasItem<Istrazivanje>(hasProperty("naziv",Is("Istrazivanje broj 3"))))
+        assertThat(istrazivanja, hasItem<Istrazivanje>(hasProperty("godina", Is(2))))
+
+        assertThat(istrazivanja, hasItem<Istrazivanje>(hasProperty("naziv",Is("Istrazivanje broj 3"))))
+        assertThat(istrazivanja, hasItem<Istrazivanje>(hasProperty("godina", Is(2))))
+
+        IstrazivanjeRepository.dodajUMojaIstrazivanja(IstrazivanjeRepository.getAll().get(0).naziv, IstrazivanjeRepository.getAll().get(0).godina)
+        IstrazivanjeRepository.dodajUMojaIstrazivanja("Istrazivanje broj 9",4)
+        assertEquals(istrazivanja.size,7)
+    }
+
+    @Test
     fun svaIstrazivanja(){
         val istrazivanja = IstrazivanjeRepository.getAll()
         assertEquals(istrazivanja.size,14)
@@ -30,23 +54,5 @@ class IstrazivanjeRepositoryTest {
         assertThat(istrazivanja, hasItem<Istrazivanje>(hasProperty("godina",Is(5))))
     }
 
-   @Test
-    fun funkcionalnostDodavanja(){
-        IstrazivanjeRepository.dodajUMojaIstrazivanja(IstrazivanjeRepository.getAll().get(0).naziv, IstrazivanjeRepository.getAll().get(0).godina)
-       IstrazivanjeRepository.dodajUMojaIstrazivanja("Istrazivanje broj 9",4)
-        val istrazivanja = IstrazivanjeRepository.getUpisani()
-        assertEquals(istrazivanja.size,3)
-        assertThat(istrazivanja, hasItem<Istrazivanje>(hasProperty("naziv",Is("Moje istrazivanje"))))
-        assertThat(istrazivanja, hasItem<Istrazivanje>(hasProperty("godina", Is(1))))
-        assertThat(istrazivanja, hasItem<Istrazivanje>(hasProperty("naziv",Is("Istrazivanje broj 9"))))
-        assertThat(istrazivanja, hasItem<Istrazivanje>(hasProperty("godina", Is(4))))
-    }
 
-    @Test
-    fun upisanaIstrazivanja(){
-        val istrazivanja = IstrazivanjeRepository.getUpisani()
-        assertEquals(istrazivanja.size,3)
-        assertThat(istrazivanja, hasItem<Istrazivanje>(hasProperty("naziv",Is("Moje istrazivanje"))))
-        assertThat(istrazivanja, hasItem<Istrazivanje>(hasProperty("godina", Is(1))))
-    }
 }

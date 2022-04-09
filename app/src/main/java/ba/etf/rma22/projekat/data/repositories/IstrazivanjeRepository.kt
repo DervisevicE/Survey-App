@@ -9,6 +9,11 @@ object IstrazivanjeRepository {
     init {
         upisani = mutableListOf()
         upisani.add(izdvojiIstrazivanje("Moje istrazivanje",1))
+        upisani.add(izdvojiIstrazivanje("Istrazivanje broj 6",2))
+        upisani.add(izdvojiIstrazivanje("Istrazivanje broj 3",2))
+        upisani.add(izdvojiIstrazivanje("Istrazivanje broj 6",2))
+        upisani.add(izdvojiIstrazivanje("Istrazivanje broj 3",2))
+
     }
 
     fun izdvojiIstrazivanje(naziv: String, godina: Int): Istrazivanje{
