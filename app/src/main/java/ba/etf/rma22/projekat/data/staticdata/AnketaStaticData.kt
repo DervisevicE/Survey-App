@@ -4,14 +4,6 @@ import ba.etf.rma22.projekat.data.models.Anketa
 import java.util.*
 
 fun ankete(): List<Anketa>{
-    /*val naziv: String,
-    val nazivIstrazivanja: String,
-    val datumPocetka: Date,
-    val datumKraja: Date,
-    val datumRada: Date?,
-    val trajanje: Int,
-    val nazivGrupe: String,
-    val progres: Float*/
 
     var cal: Calendar = Calendar.getInstance()
     cal.set(2022,3,5)

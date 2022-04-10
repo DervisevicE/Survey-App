@@ -54,5 +54,12 @@ class IstrazivanjeRepositoryTest {
         assertThat(istrazivanja, hasItem<Istrazivanje>(hasProperty("godina",Is(5))))
     }
 
+    @Test
+    fun izdvojiIstrazivanje(){
+        val istrazivanje = IstrazivanjeRepository.izdvojiIstrazivanje("Istrazivanje broj 3", 2)
+        assertThat(istrazivanje,hasProperty("godina",Is(2)))
+        assertThat(istrazivanje,hasProperty("naziv",Is("Istrazivanje broj 3")))
+    }
+
 
 }

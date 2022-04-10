@@ -1,6 +1,7 @@
 package ba.etf.rma22.projekat
 
 import ba.etf.rma22.projekat.data.models.Anketa
+import ba.etf.rma22.projekat.data.models.Istrazivanje
 import ba.etf.rma22.projekat.data.repositories.AnketaRepository
 import junit.framework.Assert.assertEquals
 import org.hamcrest.CoreMatchers.hasItem
@@ -108,6 +109,17 @@ class AnketaRepositroyTest {
         assertThat(neuradjeneAnkete,hasItem<Anketa>(hasProperty("trajanje",Is(10))))
         assertThat(neuradjeneAnkete, hasItem<Anketa>(hasProperty("nazivGrupe",Is("G4"))))
         assertThat(neuradjeneAnkete, hasItem<Anketa>(hasProperty("progres", Is(0.5F))))
+    }
+
+   @Test
+    fun izdvajanje(){
+        val anketa = AnketaRepository.izdvojiAnketu("Istrazivanje broj 6","G1")
+        assertThat(anketa, hasProperty("naziv", Is("Anketa 3")))
+        assertThat(anketa, hasProperty("nazivIstrazivanja",Is("Istrazivanje broj 6")))
+        assertThat(anketa,hasProperty("trajanje",Is(10)))
+        assertThat(anketa, hasProperty("nazivGrupe",Is("G1")))
+        assertThat(anketa, hasProperty("progres", Is(0.6F)))
+
     }
 
 }
