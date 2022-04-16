@@ -7,9 +7,14 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import ba.etf.rma22.projekat.view.AnketeListAdapater
+import ba.etf.rma22.projekat.view.FragmentAnkete
+import ba.etf.rma22.projekat.view.FragmentIstrazivanje
+import ba.etf.rma22.projekat.view.ViewPagerAdapter
 import ba.etf.rma22.projekat.viewmodel.AnketaListViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -24,53 +29,72 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        sveAnkete = findViewById(R.id.listaAnketa)
-        sveAnkete.layoutManager = GridLayoutManager(
-            this, 2, GridLayoutManager.VERTICAL,false
+        val viewPager: ViewPager2 = findViewById(R.id.view_pager)
+
+        val fragments: ArrayList<Fragment> = arrayListOf(
+            FragmentAnkete(),
+            FragmentIstrazivanje()
         )
-        sveAnketeAdapter = AnketeListAdapater(listOf())
-        sveAnkete.adapter = sveAnketeAdapter
-        sveAnketeAdapter.updateAnkete(anketaListViewModel.getAnkete())
 
-        spiner = findViewById(R.id.filterAnketa)
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.vrijednostiZaSpinner,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spiner.adapter = adapter
-        }
-
-        spiner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if(spiner.selectedItem.toString()=="Sve ankete")
-                    sveAnketeAdapter.updateAnkete(anketaListViewModel.getAnkete())
-                else if(spiner.selectedItem.toString()=="Sve moje ankete")
-                    sveAnketeAdapter.updateAnkete(anketaListViewModel.getMyAnkete())
-                else if(spiner.selectedItem.toString()=="Urađene ankete")
-                    sveAnketeAdapter.updateAnkete(anketaListViewModel.getDone())
-                else if(spiner.selectedItem.toString()=="Buduće ankete")
-                    sveAnketeAdapter.updateAnkete(anketaListViewModel.getFuture())
-                else
-                    sveAnketeAdapter.updateAnkete(anketaListViewModel.getNotTaken())
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-
-            }
-        }
-
-        dugme = findViewById(R.id.upisDugme)
-        dugme.setOnClickListener { showUpisIstrazivanje() }
-
-
+        val adapterZaVP = ViewPagerAdapter(fragments, this)
+        viewPager.adapter = adapterZaVP
 
     }
 
-    private fun showUpisIstrazivanje() {
-        val intent = Intent(this,UpisIstrazivanje::class.java)
-        startActivity(intent)
+
+    private fun openFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.container, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
+    /*sveAnkete = findViewById(R.id.listaAnketa)
+    sveAnkete.layoutManager = GridLayoutManager(
+        this, 2, GridLayoutManager.VERTICAL,false
+    )
+    sveAnketeAdapter = AnketeListAdapater(listOf())
+    sveAnkete.adapter = sveAnketeAdapter
+    sveAnketeAdapter.updateAnket  ArrayAdapter.createFromResource(
+        this,
+        R.array.vrijednostiZaSpinner,
+        android.R.layout.simple_spinner_item
+    ).also { adapter ->
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spiner.adapter = adapter
+    }e(anketaListViewModel.getAnkete())
+
+    spiner = findViewById(R.id.filterAnketa)
+
+
+    spiner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+        override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+            if(spiner.selectedItem.toString()=="Sve ankete")
+                sveAnketeAdapter.updateAnkete(anketaListViewModel.getAnkete())
+            else if(spiner.selectedItem.toString()=="Sve moje ankete")
+                sveAnketeAdapter.updateAnkete(anketaListViewModel.getMyAnkete())
+            else if(spiner.selectedItem.toString()=="Urađene ankete")
+                sveAnketeAdapter.updateAnkete(anketaListViewModel.getDone())
+            else if(spiner.selectedItem.toString()=="Buduće ankete")
+                sveAnketeAdapter.updateAnkete(anketaListViewModel.getFuture())
+            else
+                sveAnketeAdapter.updateAnkete(anketaListViewModel.getNotTaken())
+        }
+
+        override fun onNothingSelected(p0: AdapterView<*>?) {
+
+        }
+    }
+
+    dugme = findViewById(R.id.upisDugme)
+    dugme.setOnClickListener { showUpisIstrazivanje() }
+
+
+
+}
+
+private fun showUpisIstrazivanje() {
+    val intent = Intent(this,UpisIstrazivanje::class.java)
+    startActivity(intent)
+}*/
 
 }

@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Tarik/AndroidStudioProjects/RMA22projekat18923/app/src/main/res/layout/activity_main.xml" value="0.15625" />
         <entry key="..\:/Users/Tarik/AndroidStudioProjects/RMA22projekat18923/app/src/main/res/layout/activity_upis_istrazivanje.xml" value="0.1" />
         <entry key="..\:/Users/Tarik/AndroidStudioProjects/RMA22projekat18923/app/src/main/res/layout/element_anketa.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Tarik/AndroidStudioProjects/RMA22projekat18923/app/src/main/res/layout/fragment_ankete.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Tarik/AndroidStudioProjects/RMA22projekat18923/app/src/main/res/layout/fragment_istrazivanje.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>
