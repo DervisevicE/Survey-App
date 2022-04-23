@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import ba.etf.rma22.projekat.MainActivity
 import ba.etf.rma22.projekat.R
 import ba.etf.rma22.projekat.viewmodel.AnketaListViewModel
 import ba.etf.rma22.projekat.viewmodel.GrupaViewModel
@@ -30,6 +32,7 @@ class FragmentIstrazivanje : Fragment(){
         odabirIstrazivanja = view.findViewById(R.id.odabirIstrazivanja)
         odabirGrupa =  view.findViewById(R.id.odabirGrupa)
         upisDugme =  view.findViewById(R.id.dodajIstrazivanjeDugme)
+
 
         activity?.let {
             ArrayAdapter.createFromResource(
@@ -94,9 +97,14 @@ class FragmentIstrazivanje : Fragment(){
             anketaViewModel.dodajUMojeAnkete(odabirIstrazivanja.selectedItem.toString(),odabirGrupa.selectedItem.toString())
             istrazivanjeViewModel.dodajUMojaIstrazivanja(odabirIstrazivanja.selectedItem.toString(),odabirGodina.selectedItem.toString().toInt())
             //this.finish()
+            var bundle = Bundle()
+            bundle.putString("poruka", "Uspješno ste upisani u grupu " + odabirGrupa.selectedItem.toString() + " istraživanja "
+                    + odabirIstrazivanja.selectedItem.toString() + "!" )
+            val porukaFragment = FragmentPoruka()
+            porukaFragment.arguments=bundle
+            MainActivity.adapterZaVP.refreshFragment(1, porukaFragment)
         }
-
-        return view;
+                return view;
     }
 
     private fun updateGrupa(spinner: Spinner) {
