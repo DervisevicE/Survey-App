@@ -158,8 +158,5 @@ fun ankete(): List<Anketa>{
 
         Anketa("Anketa 14", "Istrazivanje broj 3", datum1, datum8,null,10, "G6", 0.4F),
 
-
-
-
         )
 }

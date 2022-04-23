@@ -20,7 +20,6 @@ class FragmentAnkete : Fragment() {
     private lateinit var sveAnketeAdapter: AnketeListAdapater
     private var anketaListViewModel = AnketaListViewModel()
     private lateinit var spiner: Spinner
-    private lateinit var dugme: FloatingActionButton
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view =  inflater.inflate(R.layout.fragment_ankete, container, false)
