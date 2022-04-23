@@ -36,6 +36,13 @@ class MainActivity : AppCompatActivity() {
         adapterZaVP = ViewPagerAdapter(fragments, this)
         viewPager.adapter = adapterZaVP
 
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+            override fun onPageSelected(position: Int) {
+                if(viewPager.currentItem==0)
+                    adapterZaVP.refreshFragment(1, FragmentIstrazivanje())
+            }
+        })
+
 
     }
 }
