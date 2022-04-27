@@ -16,7 +16,8 @@ import java.util.stream.Collectors
 import kotlin.math.roundToInt
 
 class AnketeListAdapater(
-    private var ankete: List<Anketa>
+    private var ankete: List<Anketa>,
+    private val onItemClicked : (anketa: Anketa) -> Unit
     ): RecyclerView.Adapter<AnketeListAdapater.AnketeViewHolder>() {
 
     inner class AnketeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -52,6 +53,8 @@ class AnketeListAdapater(
         var vrijednost: Int = (ankete[position].progres*10).roundToInt()
         if(vrijednost%2!=0) vrijednost+=1
         holder.progresbar.setProgress(vrijednost)
+
+        holder.itemView.setOnClickListener{onItemClicked(ankete[position])}
 
     }
 

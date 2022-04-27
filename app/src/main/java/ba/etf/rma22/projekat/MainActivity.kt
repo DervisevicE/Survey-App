@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewPager = findViewById(R.id.view_pager)
+        viewPager = findViewById(R.id.pager)
          fragments = arrayListOf(
             FragmentAnkete(),
             FragmentIstrazivanje()

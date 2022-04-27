@@ -10,12 +10,12 @@ import ba.etf.rma22.projekat.data.staticdata.pitanjeAnekta
 
 object PitanjeAnketaRepository {
 
-    fun getPitanja(nazivAnkete: String, nazivIstrazivanja: String): List<Pitanje>{
+   fun getPitanja(nazivAnkete: String, nazivIstrazivanja: String): List<Pitanje>{
 
-        var pitanjaAnkete = pitanjeAnekta().filter { anketaPitanje -> anketaPitanje.naziv == nazivAnkete && anketaPitanje.nazivIstrazivanje == nazivIstrazivanja }.toList()
+        var pitanjaAnkete = pitanjeAnekta().filter { anketaPitanje -> anketaPitanje.anketa == nazivAnkete && anketaPitanje.nazivIstrazivanje == nazivIstrazivanja }.toList()
         var svaPitanja = pitanja()
 
-        var pitanjaZaPrikazat = mutableListOf<Pitanje>()
+        var pitanjaZaPrikazat : MutableList<Pitanje> = mutableListOf()
 
         for(pitanje in svaPitanja){
             for(anketaPitanje in pitanjaAnkete){
@@ -24,32 +24,17 @@ object PitanjeAnketaRepository {
                 }
             }
         }
-
-        /*var izdvojiAnketePoIstrazivanju = ankete().filter { anketa -> anketa.naziv == nazivAnkete
-                && anketa.nazivIstrazivanja == nazivIstrazivanja}.toList()
-
-        var izdvojiPitanjaAnketa  = pitanjeAnekta().filter { anketa -> anketa.naziv == nazivAnkete }.toList()
-
-        var pogodnePitanjaAnkete = mutableListOf<PitanjeAnketa>()
-
-        for(anketaPoIstrazivanju in izdvojiAnketePoIstrazivanju){
-            for(anketaPoNazivu in izdvojiPitanjaAnketa){
-                if(anketaPoIstrazivanju.naziv===anketaPoNazivu.naziv){
-                    pogodnePitanjaAnkete.add(anketaPoNazivu)
-                }
-            }
-        }
-
-        var pitanjaZaPrikazat = mutableListOf<Pitanje>()
-        var dajPitanja = pitanja()
-
-        for(pitanje in dajPitanja){
-            for (anketaPitanje in pogodnePitanjaAnkete){
-                if(pitanje.naziv == anketaPitanje.naziv){
-                    pitanjaZaPrikazat.add(pitanje)
-                }
-            }
-        }*/
         return pitanjaZaPrikazat
     }
+
+/*    fun getPitanja(nazivAnkete: String, nazivIstrazivanja: String): List<Pitanje>{
+
+        var pitanjaAnkete = pitanjeAnekta().filter { anketaPitanje -> anketaPitanje.anketa == nazivAnkete && anketaPitanje.nazivIstrazivanje == nazivIstrazivanja }.toList()
+        var pitanjaZaPrikazat : MutableList<String> = mutableListOf()
+        for(pitanje in pitanjaAnkete)
+            pitanjaZaPrikazat.add(pitanje.naziv)
+        return pitanja().filter { x -> pitanjaZaPrikazat.contains(x.naziv) }
+    }*/
+
+
 }
