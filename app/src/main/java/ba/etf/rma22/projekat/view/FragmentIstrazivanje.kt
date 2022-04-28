@@ -96,7 +96,6 @@ class FragmentIstrazivanje : Fragment(){
         upisDugme.setOnClickListener{
             anketaViewModel.dodajUMojeAnkete(odabirIstrazivanja.selectedItem.toString(),odabirGrupa.selectedItem.toString())
             istrazivanjeViewModel.dodajUMojaIstrazivanja(odabirIstrazivanja.selectedItem.toString(),odabirGodina.selectedItem.toString().toInt())
-            //this.finish()
             var bundle = Bundle()
             bundle.putString("poruka", "Uspješno ste upisani u grupu " + odabirGrupa.selectedItem.toString() + " istraživanja "
                     + odabirIstrazivanja.selectedItem.toString() + "!" )

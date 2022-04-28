@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import ba.etf.rma22.projekat.R
 
-class FragmentPitanje() : Fragment() {
+class FragmentPitanje : Fragment() {
 
     private lateinit var pitanja : TextView
     private lateinit var odgovori : ListView

@@ -48,6 +48,8 @@ class FragmentAnkete : Fragment() {
             }
         }
 
+
+
         spiner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 if(spiner.selectedItem.toString()=="Sve ankete")
@@ -71,7 +73,7 @@ class FragmentAnkete : Fragment() {
     private fun prikaziAnketu(anketa: Anketa) {
     var fragmenti : MutableList<Fragment> = arrayListOf()
         val statusAnkete = dajStatus(anketa)
-        if(statusAnkete!="zuta" && anketaListViewModel.getMyAnkete().contains(anketa)){
+        if(statusAnkete!="zuta"  && anketaListViewModel.getMyAnkete().contains(anketa)){
             val pitanjaZaPrikazat = pitanjeAnketaViewModel.getPitanja(anketa.naziv, anketa.nazivIstrazivanja)
             if(pitanjaZaPrikazat.isNotEmpty()){
                 MainActivity.adapterZaVP.removeAll()
@@ -79,10 +81,23 @@ class FragmentAnkete : Fragment() {
                     var bundle = Bundle()
                     bundle.putString("tekstPitanja", i.tekst)
 
+                    val odgovoriNaPitanje = pitanjeAnketaViewModel.getOdgovori(i.naziv)
+                    bundle.putStringArrayList("odgovori", odgovoriNaPitanje)
+
                     val fragmentPitanje = FragmentPitanje()
                     fragmentPitanje.arguments = bundle
                     fragmenti.add(fragmentPitanje)
                 }
+                val nazivAnkete = anketa.naziv
+                val nazivIstrazivanja = anketa.nazivIstrazivanja
+                val fragmentPredaj = FragmentPredaj()
+                var bundleZaPredaj = Bundle()
+                bundleZaPredaj.putString("nazivAnkete", nazivAnkete)
+                bundleZaPredaj.putString("nazivIstrazivanja", nazivIstrazivanja)
+                var brojFragmenata = fragmenti.size
+                bundleZaPredaj.putString("pozicija", brojFragmenata.toString())
+                fragmentPredaj.arguments = bundleZaPredaj
+                fragmenti.add(fragmentPredaj)
                 var pomBrojac=0
                 for(i in fragmenti){
                     MainActivity.adapterZaVP.add(pomBrojac,i)
@@ -91,6 +106,8 @@ class FragmentAnkete : Fragment() {
             }
         }
     }
+
+
 
     private fun dajStatus(anketa: Anketa): String {
         var cal: Calendar = Calendar.getInstance()

@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import ba.etf.rma22.projekat.MainActivity
 import ba.etf.rma22.projekat.R
 
 class FragmentPredaj : Fragment(){
@@ -21,9 +22,21 @@ class FragmentPredaj : Fragment(){
         progres = view.findViewById(R.id.progresTekst)
         predaj = view.findViewById(R.id.dugmePredaj)
 
-        predaj.setOnClickListener {
+        val nazivAnkete = this.arguments?.getString("nazivAnkete")
+        val nazivIstrazivanja = this.arguments?.getString("nazivIstrazivanja")
+        val pozicija = this.arguments?.getString("pozicija")
+        val pozicijaInt = pozicija?.toInt()
 
+        predaj.setOnClickListener {
+            var bundle = Bundle()
+            bundle.putString("poruka", "Završili ste anketu " + nazivAnkete + " u okviru istraživanja " + nazivIstrazivanja + ".")
+            val porukaFragment = FragmentPoruka()
+            porukaFragment.arguments=bundle
+            if (pozicijaInt != null) {
+                MainActivity.adapterZaVP.refreshFragment(pozicijaInt, porukaFragment)
+            }
         }
+
 
 
         return view
