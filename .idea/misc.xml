@@ -3,15 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Tarik/AndroidStudioProjects/RMA22projekat18923/app/src/main/res/layout/activity_main.xml" value="0.15625" />
+        <entry key="..\:/Users/Tarik/AndroidStudioProjects/RMA22projekat18923/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Tarik/AndroidStudioProjects/RMA22projekat18923/app/src/main/res/layout/activity_upis_istrazivanje.xml" value="0.1" />
-        <entry key="..\:/Users/Tarik/AndroidStudioProjects/RMA22projekat18923/app/src/main/res/layout/element_anketa.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Tarik/AndroidStudioProjects/RMA22projekat18923/app/src/main/res/layout/element_anketa.xml" value="0.1" />
         <entry key="..\:/Users/Tarik/AndroidStudioProjects/RMA22projekat18923/app/src/main/res/layout/fragment_ankete.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Tarik/AndroidStudioProjects/RMA22projekat18923/app/src/main/res/layout/fragment_istrazivanje.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Tarik/AndroidStudioProjects/RMA22projekat18923/app/src/main/res/layout/fragment_istrazivanje.xml" value="0.1" />
         <entry key="..\:/Users/Tarik/AndroidStudioProjects/RMA22projekat18923/app/src/main/res/layout/fragment_pitanja.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/Tarik/AndroidStudioProjects/RMA22projekat18923/app/src/main/res/layout/fragment_pitanje.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Tarik/AndroidStudioProjects/RMA22projekat18923/app/src/main/res/layout/fragment_poruka.xml" value="0.1" />
-        <entry key="..\:/Users/Tarik/AndroidStudioProjects/RMA22projekat18923/app/src/main/res/layout/fragment_predaj.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Tarik/AndroidStudioProjects/RMA22projekat18923/app/src/main/res/layout/fragment_predaj.xml" value="0.1" />
+        <entry key="..\:/Users/Tarik/AndroidStudioProjects/RMA22projekat18923/app/src/main/res/layout/text_color_layout.xml" value="0.2" />
       </map>
     </option>
   </component>

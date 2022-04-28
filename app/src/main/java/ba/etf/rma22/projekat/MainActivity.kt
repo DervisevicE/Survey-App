@@ -38,16 +38,12 @@ class MainActivity : AppCompatActivity() {
 
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
-                if(viewPager.currentItem==0)
+                if(viewPager.currentItem==0 && adapterZaVP.getItem(1) is FragmentPoruka)
                     adapterZaVP.refreshFragment(1, FragmentIstrazivanje())
                 super.onPageSelected(position)
 
             }
 
         })
-
-
-
-
     }
 }

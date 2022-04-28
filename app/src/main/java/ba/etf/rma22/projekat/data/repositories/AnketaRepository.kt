@@ -30,6 +30,7 @@ object AnketaRepository {
         mojeAnkete.add(izdvojiAnketu("Istrazivanje broj 6", "G4"))
         mojeAnkete.add(izdvojiAnketu("Istrazivanje broj 3", "G3"))
         mojeAnkete.add(izdvojiAnketu("Istrazivanje broj 3", "G1"))
+        mojeAnkete.add(izdvojiAnketu("Istrazivanje broj 1", "G3"))
 
     }
 
@@ -73,25 +74,5 @@ object AnketaRepository {
         }
         return "plava"
     }
-
-   /* fun getPitanja(nazivAnkete: String, nazivIstrazivanja: String) : List<String> {
-
-        var pitanjaAnkete =
-            pitanjeAnekta().filter { anketaPitanje -> anketaPitanje.naziv == nazivAnkete && anketaPitanje.nazivIstrazivanje == nazivIstrazivanja }
-                .toList()
-        var svaPitanja = pitanja()
-
-        var pitanjaZaPrikazat = mutableListOf<String>()
-
-        for (pitanje in svaPitanja) {
-            for (anketaPitanje in pitanjaAnkete) {
-                if (pitanje.naziv == anketaPitanje.naziv) {
-                    pitanjaZaPrikazat.add(pitanje.tekst)
-                }
-            }
-        }
-        return pitanjaZaPrikazat
-    }*/
-
 
 }

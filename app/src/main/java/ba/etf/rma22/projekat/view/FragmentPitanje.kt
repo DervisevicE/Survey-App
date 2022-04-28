@@ -14,7 +14,6 @@ import ba.etf.rma22.projekat.R
 
 
 class FragmentPitanje : Fragment() {
-
     private lateinit var pitanja : TextView
     private lateinit var odgovori : ListView
     private lateinit var zaustavi : Button
@@ -31,6 +30,8 @@ class FragmentPitanje : Fragment() {
 
        val opcijeOdgovora : ArrayList<String> = this.arguments?.getStringArrayList("odgovori") as ArrayList<String>
 
+        brojOpcija = opcijeOdgovora.size
+
         adapter =
             activity?.let { ArrayAdapter(it, android.R.layout.simple_list_item_1,opcijeOdgovora) }!!
         odgovori.adapter = adapter
@@ -38,10 +39,11 @@ class FragmentPitanje : Fragment() {
             OnItemClickListener { parent, view, position, id ->
                 val odabrani = view.findViewById(android.R.id.text1) as TextView
                 odabrani.setTextColor(Color.parseColor("#0000FF"))
+                brojOdgovorenih++
             }
 
         zaustavi.setOnClickListener {
-            //MainActivity.adapterZaVP.removeAll()
+            MainActivity.adapterZaVP.removeAll()
             MainActivity.adapterZaVP.add(0,FragmentAnkete())
             MainActivity.adapterZaVP.add(1, FragmentIstrazivanje())
             MainActivity.viewPager.currentItem=0
@@ -50,6 +52,8 @@ class FragmentPitanje : Fragment() {
         return view
     }
     companion object {
-        fun newInstance(toString: String): FragmentPoruka = FragmentPoruka()
+        fun newInstance(): FragmentPitanje = FragmentPitanje()
+        var brojOdgovorenih : Int = 0
+        var brojOpcija : Int = 0
     }
 }

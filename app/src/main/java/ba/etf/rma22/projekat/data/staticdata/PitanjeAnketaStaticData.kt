@@ -5,6 +5,11 @@ import ba.etf.rma22.projekat.data.models.PitanjeAnketa
 fun pitanjeAnekta() : List<PitanjeAnketa>{
 
  return listOf(
+
+  PitanjeAnketa("1", "Moja Anketa", "Moje istrazivanje"),
+  PitanjeAnketa("2", "Moja Anketa", "Moje istrazivanje"),
+  PitanjeAnketa("3", "Moja Anketa", "Moje istrazivanje"),
+
   PitanjeAnketa("1", "Anketa 1", "Istrazivanje broj 3"),
   PitanjeAnketa("2", "Anketa 1", "Istrazivanje broj 3"),
   PitanjeAnketa("3", "Anketa 1","Istrazivanje broj 3"),

@@ -13,6 +13,7 @@ object IstrazivanjeRepository {
         upisani.add(izdvojiIstrazivanje("Istrazivanje broj 3",2))
         upisani.add(izdvojiIstrazivanje("Istrazivanje broj 6",2))
         upisani.add(izdvojiIstrazivanje("Istrazivanje broj 3",2))
+        upisani.add(izdvojiIstrazivanje("Istrazivanje broj 1",1))
 
     }
 

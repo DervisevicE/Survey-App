@@ -31,7 +31,7 @@ class FragmentAnkete : Fragment() {
         sveAnkete = view.findViewById(R.id.listaAnketa)
         sveAnkete.layoutManager = GridLayoutManager(activity, 2)
         sveAnketeAdapter = AnketeListAdapater(arrayListOf()){
-                anketa -> prikaziAnketu(anketa)
+                prikaziAnketu(it)
         }
         sveAnkete.adapter = sveAnketeAdapter
         sveAnketeAdapter.updateAnkete(anketaListViewModel.getAnkete())
@@ -70,10 +70,6 @@ class FragmentAnkete : Fragment() {
         return view;
     }
 
-    /*override fun onResume() {
-        super.onResume()
-        MainActivity.adapterZaVP.refreshFragment(1, FragmentIstrazivanje())
-    }*/
 
     private fun prikaziAnketu(anketa: Anketa) {
     var fragmenti : MutableList<Fragment> = arrayListOf()
@@ -112,8 +108,6 @@ class FragmentAnkete : Fragment() {
         }
     }
 
-
-
     private fun dajStatus(anketa: Anketa): String {
         var cal: Calendar = Calendar.getInstance()
         cal.set(LocalDate.now().year, LocalDate.now().monthValue, LocalDate.now().dayOfMonth)
@@ -127,6 +121,6 @@ class FragmentAnkete : Fragment() {
     }
 
     companion object {
-        fun newInstance(): FragmentIstrazivanje = FragmentIstrazivanje()
+        fun newInstance(): FragmentAnkete = FragmentAnkete()
     }
 }

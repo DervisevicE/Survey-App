@@ -17,6 +17,7 @@ class ViewPagerAdapter(val items: ArrayList<Fragment>, activity: AppCompatActivi
     fun add(index: Int, fragment: Fragment) {
         items.add(index, fragment)
         notifyItemChanged(index)
+        notifyDataSetChanged()
     }
 
     fun refreshFragment(index: Int, fragment: Fragment) {

@@ -21,6 +21,6 @@ class FragmentPoruka : Fragment() {
         return view
     }
     companion object {
-        fun newInstance(toString: String, toString1: String): FragmentPoruka = FragmentPoruka()
+        fun newInstance(): FragmentPoruka = FragmentPoruka()
     }
 }
