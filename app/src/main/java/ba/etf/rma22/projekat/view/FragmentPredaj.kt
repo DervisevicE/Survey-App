@@ -25,20 +25,21 @@ class FragmentPredaj : Fragment(){
         val nazivAnkete = this.arguments?.getString("nazivAnkete")
         val nazivIstrazivanja = this.arguments?.getString("nazivIstrazivanja")
         val pozicija = this.arguments?.getString("pozicija")
-        val pozicijaInt = pozicija?.toInt()
 
         predaj.setOnClickListener {
+
             var bundle = Bundle()
             bundle.putString("poruka", "Završili ste anketu " + nazivAnkete + " u okviru istraživanja " + nazivIstrazivanja + ".")
             val porukaFragment = FragmentPoruka()
             porukaFragment.arguments=bundle
-            if (pozicijaInt != null) {
-                MainActivity.adapterZaVP.refreshFragment(pozicijaInt, porukaFragment)
-            }
+            MainActivity.adapterZaVP.removeAll()
+            MainActivity.adapterZaVP.add(0, FragmentAnkete())
+            MainActivity.adapterZaVP.add(1, porukaFragment)
+            MainActivity.viewPager.currentItem=1
+
+
+
         }
-
-
-
         return view
     }
     companion object {

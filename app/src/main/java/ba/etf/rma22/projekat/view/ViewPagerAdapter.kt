@@ -30,7 +30,18 @@ class ViewPagerAdapter(val items: ArrayList<Fragment>, activity: AppCompatActivi
     }
 
     fun removeAll(){
-        items.clear()
+        //items.clear()
+        for(i in itemCount-1 downTo 0){
+            remove(i)
+            notifyItemChanged(i)
+        }
+        notifyDataSetChanged()
+
+    }
+
+
+    fun getItem(index: Int) : Fragment {
+        return items[index]
     }
 
     override fun getItemId(position: Int): Long {

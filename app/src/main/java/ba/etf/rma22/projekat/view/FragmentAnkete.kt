@@ -70,6 +70,11 @@ class FragmentAnkete : Fragment() {
         return view;
     }
 
+    /*override fun onResume() {
+        super.onResume()
+        MainActivity.adapterZaVP.refreshFragment(1, FragmentIstrazivanje())
+    }*/
+
     private fun prikaziAnketu(anketa: Anketa) {
     var fragmenti : MutableList<Fragment> = arrayListOf()
         val statusAnkete = dajStatus(anketa)
@@ -91,12 +96,12 @@ class FragmentAnkete : Fragment() {
                 val nazivAnkete = anketa.naziv
                 val nazivIstrazivanja = anketa.nazivIstrazivanja
                 val fragmentPredaj = FragmentPredaj()
+
                 var bundleZaPredaj = Bundle()
                 bundleZaPredaj.putString("nazivAnkete", nazivAnkete)
                 bundleZaPredaj.putString("nazivIstrazivanja", nazivIstrazivanja)
-                var brojFragmenata = fragmenti.size
-                bundleZaPredaj.putString("pozicija", brojFragmenata.toString())
                 fragmentPredaj.arguments = bundleZaPredaj
+
                 fragmenti.add(fragmentPredaj)
                 var pomBrojac=0
                 for(i in fragmenti){

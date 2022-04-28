@@ -40,8 +40,13 @@ class MainActivity : AppCompatActivity() {
             override fun onPageSelected(position: Int) {
                 if(viewPager.currentItem==0)
                     adapterZaVP.refreshFragment(1, FragmentIstrazivanje())
+                super.onPageSelected(position)
+
             }
+
         })
+
+
 
 
     }
