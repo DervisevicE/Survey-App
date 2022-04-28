@@ -27,14 +27,19 @@ object PitanjeAnketaRepository {
         return pitanjaZaPrikazat
     }
 
-/*    fun getPitanja(nazivAnkete: String, nazivIstrazivanja: String): List<Pitanje>{
+    fun getOdgovori(nazivPitanja : String) : ArrayList<String> {
+        var pitanje = pitanja().filter { pitanje -> pitanje.naziv == nazivPitanja }.toList()
+        var moguciOdgovori : ArrayList<String> = arrayListOf()
 
-        var pitanjaAnkete = pitanjeAnekta().filter { anketaPitanje -> anketaPitanje.anketa == nazivAnkete && anketaPitanje.nazivIstrazivanje == nazivIstrazivanja }.toList()
-        var pitanjaZaPrikazat : MutableList<String> = mutableListOf()
-        for(pitanje in pitanjaAnkete)
-            pitanjaZaPrikazat.add(pitanje.naziv)
-        return pitanja().filter { x -> pitanjaZaPrikazat.contains(x.naziv) }
-    }*/
+        for(o in pitanje){
+            var opcije : MutableList<String> = mutableListOf()
+            for(odg in o.opcije){
+                moguciOdgovori.add(odg)
+            }
+        }
+
+        return moguciOdgovori
+    }
 
 
 }

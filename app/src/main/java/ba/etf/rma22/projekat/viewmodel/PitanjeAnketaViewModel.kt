@@ -8,4 +8,8 @@ class PitanjeAnketaViewModel {
     fun getPitanja(nazivAnkete: String, nazivIstrazivanja: String) : List<Pitanje>{
         return PitanjeAnketaRepository.getPitanja(nazivAnkete, nazivIstrazivanja)
     }
+
+    fun getOdgovori(nazivPitanja : String) : ArrayList<String> {
+        return PitanjeAnketaRepository.getOdgovori(nazivPitanja)
+    }
 }

@@ -27,6 +27,11 @@ class FragmentPitanje() : Fragment() {
         val tekstPitanja = this.arguments?.getString("tekstPitanja")
         pitanja.text = tekstPitanja
 
+       val opcijeOdgovora : ArrayList<String> = this.arguments?.getStringArrayList("odgovori") as ArrayList<String>
+
+        adapter =
+            activity?.let { ArrayAdapter(it, android.R.layout.simple_list_item_1,opcijeOdgovora) }!!
+        odgovori.adapter = adapter
         return view
     }
     companion object {
