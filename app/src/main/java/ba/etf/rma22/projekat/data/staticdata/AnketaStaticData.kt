@@ -5,7 +5,9 @@ import java.util.*
 
 fun ankete(): List<Anketa>{
 
-    var cal: Calendar = Calendar.getInstance()
+    return emptyList()
+
+    /*var cal: Calendar = Calendar.getInstance()
     cal.set(2022,3,5)
     var datum1: Date = cal.time
 
@@ -158,5 +160,5 @@ fun ankete(): List<Anketa>{
 
         Anketa("Anketa 14", "Istrazivanje broj 3", datum1, datum8,null,10, "G6", 0F),
 
-        )
+        )*/
 }

@@ -41,5 +41,4 @@ object PitanjeAnketaRepository {
         return moguciOdgovori
     }
 
-
 }

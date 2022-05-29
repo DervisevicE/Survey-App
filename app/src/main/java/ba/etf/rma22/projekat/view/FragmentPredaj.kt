@@ -60,6 +60,7 @@ class FragmentPredaj : Fragment(){
             var date: Date = cal.time
 
             anketaListViewModel.getMyAnkete().filter { anketa -> anketa.naziv==nazivAnkete && anketa.nazivIstrazivanja==nazivIstrazivanja }.first().datumRada = date
+
         }
         return view
     }

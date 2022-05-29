@@ -4,6 +4,8 @@ import ba.etf.rma22.projekat.ankete
 import ba.etf.rma22.projekat.data.models.*
 import ba.etf.rma22.projekat.data.staticdata.pitanja
 import ba.etf.rma22.projekat.data.staticdata.pitanjeAnekta
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.time.LocalDate
 import java.util.*
 import java.util.stream.Collectors
@@ -13,7 +15,7 @@ object AnketaRepository {
     private var mojeAnkete: MutableList<Anketa>
 
     fun izdvojiAnketu(istrazivanje: String, grupa: String): Anketa {
-        return getAll().filter { anketa ->
+        return getAll1().filter { anketa ->
             anketa.nazivIstrazivanja == istrazivanje &&
                     anketa.nazivGrupe == grupa
         }.first()
@@ -25,21 +27,27 @@ object AnketaRepository {
 
     init {
         mojeAnkete = mutableListOf()
-        mojeAnkete.add(izdvojiAnketu("Moje istrazivanje", "G1"))
+        /*mojeAnkete.add(izdvojiAnketu("Moje istrazivanje", "G1"))
         mojeAnkete.add(izdvojiAnketu("Istrazivanje broj 6", "G1"))
         mojeAnkete.add(izdvojiAnketu("Istrazivanje broj 6", "G4"))
         mojeAnkete.add(izdvojiAnketu("Istrazivanje broj 3", "G3"))
         mojeAnkete.add(izdvojiAnketu("Istrazivanje broj 3", "G1"))
         mojeAnkete.add(izdvojiAnketu("Istrazivanje broj 1", "G3"))
-
+*/
     }
 
     fun getAnkete(): List<Anketa> {
         return ankete()
     }
 
-    fun getAll(): List<Anketa> {
+    fun getAll1(): List<Anketa> {
         return ankete()
+    }
+
+    suspend fun getAll() : List<Anketa>{
+        return withContext(Dispatchers.IO){
+            return@withContext ApiAdapter.retrofit.getAll()
+        }
     }
 
     fun getMyAnkete(): List<Anketa> {

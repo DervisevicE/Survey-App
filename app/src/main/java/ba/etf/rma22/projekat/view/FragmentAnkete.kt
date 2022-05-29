@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,10 @@ import ba.etf.rma22.projekat.R
 import ba.etf.rma22.projekat.data.models.Anketa
 import ba.etf.rma22.projekat.viewmodel.AnketaListViewModel
 import ba.etf.rma22.projekat.viewmodel.PitanjeAnketaViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.LocalDate
 import java.util.*
 
@@ -34,7 +39,7 @@ class FragmentAnkete : Fragment() {
                 prikaziAnketu(it)
         }
         sveAnkete.adapter = sveAnketeAdapter
-        sveAnketeAdapter.updateAnkete(anketaListViewModel.getAnkete())
+        //sveAnketeAdapter.updateAnkete(anketaListViewModel.getAnkete())
 
         spiner = view.findViewById(R.id.filterAnketa)
         activity?.let {
@@ -53,7 +58,11 @@ class FragmentAnkete : Fragment() {
         spiner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 if(spiner.selectedItem.toString()=="Sve ankete")
-                    sveAnketeAdapter.updateAnkete(anketaListViewModel.getAnkete())
+                    anketaListViewModel.getAnkete(
+                        onSuccess = ::onSuccess,
+                        onError = ::onError
+                    )
+                    //sveAnketeAdapter.updateAnkete(anketaListViewModel.getAnkete())
                 else if(spiner.selectedItem.toString()=="Sve moje ankete")
                     sveAnketeAdapter.updateAnkete(anketaListViewModel.getMyAnkete())
                 else if(spiner.selectedItem.toString()=="Urađene ankete")
@@ -68,6 +77,23 @@ class FragmentAnkete : Fragment() {
         }
 
         return view;
+    }
+
+    fun onSuccess(ankete : List<Anketa>){
+        GlobalScope.launch(Dispatchers.IO){
+            withContext(Dispatchers.Main){
+                sveAnketeAdapter.updateAnkete(ankete)
+            }
+        }
+    }
+
+    fun onError(){
+        GlobalScope.launch(Dispatchers.IO){
+            withContext(Dispatchers.Main){
+                val toast = Toast.makeText(context, "Error", Toast.LENGTH_SHORT)
+                toast.show()
+            }
+        }
     }
 
 

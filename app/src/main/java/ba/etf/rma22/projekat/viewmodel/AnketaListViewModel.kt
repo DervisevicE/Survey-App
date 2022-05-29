@@ -3,11 +3,23 @@ package ba.etf.rma22.projekat.viewmodel
 import ba.etf.rma22.projekat.ankete
 import ba.etf.rma22.projekat.data.models.Anketa
 import ba.etf.rma22.projekat.data.repositories.AnketaRepository
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class AnketaListViewModel {
 
-    fun getAnkete() : List<Anketa>{
+    /*fun getAnkete() : List<Anketa>{
         return AnketaRepository.getAnkete();
+    }*/
+
+    fun getAnkete(onSuccess : (ankete : List<Anketa>) -> Unit, onError : () -> Unit){
+        GlobalScope.launch {
+            val ankete = AnketaRepository.getAll()
+            when(ankete){
+                is List<Anketa> -> onSuccess.invoke(ankete)
+                else -> onError.invoke()
+            }
+        }
     }
 
     fun getMyAnkete() : List<Anketa>{

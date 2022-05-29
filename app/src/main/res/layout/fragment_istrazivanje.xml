@@ -36,8 +36,7 @@
         android:layout_below="@+id/odabirGrupa"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
-        android:text="Upiši me"
-        />
+        android:text="Upiši me" />
 
 
 
