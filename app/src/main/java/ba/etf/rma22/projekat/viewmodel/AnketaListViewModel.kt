@@ -22,8 +22,18 @@ class AnketaListViewModel {
         }
     }
 
-    fun getMyAnkete() : List<Anketa>{
+    /*fun getMyAnkete() : List<Anketa>{
         return AnketaRepository.getMyAnkete()
+    }*/
+
+    fun getMyAnkete(onSuccess: (ankete: List<Anketa>) -> Unit, onError: () -> Unit){
+        GlobalScope.launch {
+            val ankete = AnketaRepository.getUpisane()
+            when(ankete){
+                is List<Anketa> -> onSuccess.invoke(ankete)
+                else -> onError.invoke()
+            }
+        }
     }
 
     fun getDone(): List<Anketa>{

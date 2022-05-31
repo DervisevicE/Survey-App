@@ -58,13 +58,12 @@ class FragmentAnkete : Fragment() {
         spiner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 if(spiner.selectedItem.toString()=="Sve ankete")
-                    anketaListViewModel.getAnkete(
-                        onSuccess = ::onSuccess,
-                        onError = ::onError
-                    )
+                    anketaListViewModel.getAnkete(onSuccess = ::onSuccess,
+                        onError = ::onError)
                     //sveAnketeAdapter.updateAnkete(anketaListViewModel.getAnkete())
                 else if(spiner.selectedItem.toString()=="Sve moje ankete")
-                    sveAnketeAdapter.updateAnkete(anketaListViewModel.getMyAnkete())
+                    anketaListViewModel.getMyAnkete(onSuccess = ::onSuccess,
+                        onError = ::onError)
                 else if(spiner.selectedItem.toString()=="Urađene ankete")
                     sveAnketeAdapter.updateAnkete(anketaListViewModel.getDone())
                 else if(spiner.selectedItem.toString()=="Buduće ankete")
@@ -83,6 +82,7 @@ class FragmentAnkete : Fragment() {
         GlobalScope.launch(Dispatchers.IO){
             withContext(Dispatchers.Main){
                 sveAnketeAdapter.updateAnkete(ankete)
+                sveAnketeAdapter.notifyDataSetChanged()
             }
         }
     }
@@ -98,7 +98,7 @@ class FragmentAnkete : Fragment() {
 
 
     private fun prikaziAnketu(anketa: Anketa) {
-    var fragmenti : MutableList<Fragment> = arrayListOf()
+    /*var fragmenti : MutableList<Fragment> = arrayListOf()
         val statusAnkete = dajStatus(anketa)
         if(statusAnkete!="zuta"  && anketaListViewModel.getMyAnkete().contains(anketa)){
             val pitanjaZaPrikazat = pitanjeAnketaViewModel.getPitanja(anketa.naziv, anketa.nazivIstrazivanja)
@@ -131,7 +131,7 @@ class FragmentAnkete : Fragment() {
                     pomBrojac++
                 }
             }
-        }
+        }*/
     }
 
     private fun dajStatus(anketa: Anketa): String {

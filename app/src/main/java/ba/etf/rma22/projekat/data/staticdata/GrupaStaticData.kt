@@ -3,7 +3,8 @@ package ba.etf.rma22.projekat.data.repositories
 import ba.etf.rma22.projekat.data.models.Grupa
 
 fun grupe(): List<Grupa>{
-    return listOf(
+    return emptyList()
+    /*return listOf(
         Grupa("G1", "Istrazivanje broj 1"),
         Grupa("G2","Istrazivanje broj 1"),
         Grupa("G3","Istrazivanje broj 1"),
@@ -62,5 +63,5 @@ fun grupe(): List<Grupa>{
         Grupa("G6","Istrazivanje broj 14"),
 
 
-        )
+        )*/
 }

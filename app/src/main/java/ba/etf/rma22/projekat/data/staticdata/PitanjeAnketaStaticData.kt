@@ -3,8 +3,8 @@ package ba.etf.rma22.projekat.data.staticdata
 import ba.etf.rma22.projekat.data.models.PitanjeAnketa
 
 fun pitanjeAnekta() : List<PitanjeAnketa>{
-
- return listOf(
+ return emptyList()
+/* return listOf(
 
   PitanjeAnketa("1", "Moja Anketa", "Moje istrazivanje"),
   PitanjeAnketa("2", "Moja Anketa", "Moje istrazivanje"),
@@ -149,5 +149,5 @@ fun pitanjeAnekta() : List<PitanjeAnketa>{
   PitanjeAnketa("8", "Anketa 14", "Istrazivanje broj 3"),
   PitanjeAnketa("10", "Anketa 14", "Istrazivanje broj 3"),
   PitanjeAnketa("2", "Anketa 14", "Istrazivanje broj 3")
- )
+ )*/
 }

@@ -52,14 +52,14 @@ class FragmentPredaj : Fragment(){
             MainActivity.adapterZaVP.add(1, porukaFragment)
             MainActivity.viewPager.currentItem=1
 
-            anketaListViewModel.getMyAnkete().filter { anketa -> anketa.naziv==nazivAnkete && anketa.nazivIstrazivanja==nazivIstrazivanja }.first().progres =
+            /*anketaListViewModel.getMyAnkete().filter { anketa -> anketa.naziv==nazivAnkete && anketa.nazivIstrazivanja==nazivIstrazivanja }.first().progres =
                 vrijednost.toFloat()
-
+*/
             var cal: Calendar = Calendar.getInstance()
             cal.set(LocalDate.now().year, LocalDate.now().monthValue, LocalDate.now().dayOfMonth)
             var date: Date = cal.time
 
-            anketaListViewModel.getMyAnkete().filter { anketa -> anketa.naziv==nazivAnkete && anketa.nazivIstrazivanja==nazivIstrazivanja }.first().datumRada = date
+           // anketaListViewModel.getMyAnkete().filter { anketa -> anketa.naziv==nazivAnkete && anketa.nazivIstrazivanja==nazivIstrazivanja }.first().datumRada = date
 
         }
         return view

@@ -6,6 +6,7 @@ import ba.etf.rma22.projekat.data.staticdata.pitanja
 import ba.etf.rma22.projekat.data.staticdata.pitanjeAnekta
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.lang.Exception
 import java.time.LocalDate
 import java.util.*
 import java.util.stream.Collectors
@@ -44,12 +45,6 @@ object AnketaRepository {
         return ankete()
     }
 
-    suspend fun getAll() : List<Anketa>{
-        return withContext(Dispatchers.IO){
-            return@withContext ApiAdapter.retrofit.getAll()
-        }
-    }
-
     fun getMyAnkete(): List<Anketa> {
         if (mojeAnkete.size == 0)
             return emptyList()
@@ -81,6 +76,56 @@ object AnketaRepository {
             else if (anketa.datumPocetka.after(date) && anketa.datumKraja.after(date)) return "zuta"
         }
         return "plava"
+    }
+
+    suspend fun getAll(offset: Int) : List<Anketa>{
+        return withContext(Dispatchers.IO){
+            return@withContext ApiAdapter.retrofit.getAllAnkete(offset)
+        }
+    }
+
+    suspend fun getAll() : List<Anketa>{
+        var sveAnkete = mutableListOf<Anketa>()
+        var offset = 1
+        while (true){
+            val brojAnketa : Int
+            withContext(Dispatchers.IO){
+                val resposne = ApiAdapter.retrofit.getAllAnkete(offset)
+                brojAnketa = resposne.size
+                sveAnkete = sveAnkete.plus(resposne) as MutableList<Anketa>
+            }
+            if (brojAnketa!=5)
+                break
+            offset++
+        }
+
+        return sveAnkete
+    }
+
+    suspend fun getById(id: Int) : Anketa? {
+        return withContext(Dispatchers.IO){
+            try {
+                return@withContext ApiAdapter.retrofit.getById(id)
+            } catch (e: Exception){
+                return@withContext null
+            }
+        }
+    }
+
+    suspend fun getUpisane() : List<Anketa>{
+        //lista svih anketa za GRUPE na kjima je STUDENT UPISAN
+        return withContext(Dispatchers.IO){
+            var anketeZaUpisaneGrupe = mutableListOf<Anketa>()
+
+            var upisaneGrupe = ApiAdapter.retrofit.dajUpisaneGrupe(AccountRepository.getHash())
+            for(grupa in upisaneGrupe){
+                var pom = ApiAdapter.retrofit.getUpisane(grupa.id)
+                for(anketa in pom){
+                    anketeZaUpisaneGrupe.add(anketa)
+                }
+            }
+            return@withContext anketeZaUpisaneGrupe
+        }
     }
 
 }

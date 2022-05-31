@@ -3,7 +3,8 @@ package ba.etf.rma22.projekat.data
 import ba.etf.rma22.projekat.data.models.Istrazivanje
 
 fun istrazivanja(): List<Istrazivanje>{
-    return listOf(
+    return emptyList()
+    /*return listOf(
         Istrazivanje("Istrazivanje broj 1", 1),
         Istrazivanje("Istrazivanje broj 2",1),
         Istrazivanje("Istrazivanje broj 3", 2),
@@ -19,5 +20,5 @@ fun istrazivanja(): List<Istrazivanje>{
         Istrazivanje("Istrazivanje broj 12",5),
         Istrazivanje("Istrazivanje broj 13",5)
     )
-
+*/
 }

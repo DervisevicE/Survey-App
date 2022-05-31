@@ -3,7 +3,8 @@ package ba.etf.rma22.projekat.data.staticdata
 import ba.etf.rma22.projekat.data.models.Pitanje
 
 fun pitanja() : List<Pitanje>{
-    return listOf(
+    return emptyList()
+    /*return listOf(
         Pitanje("1", "Ko pjeva pjesma 'Heart of Glass'?", listOf("Blondie", "Šaban Šaulić", "Bakir Izetbegović")),
         Pitanje("2", "Hemijska formula vode je:", listOf("H20", "H202", "C02") ),
         Pitanje("3","U popularnoj seriji 'Game of Thrones' prva epizoda se zove:", listOf("Fire and Blood", "The Rains of Castamere", "Winter is comming")),
@@ -14,5 +15,5 @@ fun pitanja() : List<Pitanje>{
         Pitanje("8", "Grčka božica ljubavi je:", listOf("Atena", "Afrodita", "Artemida")),
         Pitanje("9", "Koje godine je prvi put bačena nukelarna bomba?", listOf("2018", "1930", "1945")),
         Pitanje("10", "Ko je izmuio sijalicu?", listOf("Nikola Tesla", "Thomas Edison", "ALbert Einstein") )
-    )
+    )*/
 }
