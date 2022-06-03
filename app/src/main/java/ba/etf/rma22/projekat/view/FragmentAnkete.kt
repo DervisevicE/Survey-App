@@ -60,7 +60,6 @@ class FragmentAnkete : Fragment() {
                 if(spiner.selectedItem.toString()=="Sve ankete")
                     anketaListViewModel.getAnkete(onSuccess = ::onSuccess,
                         onError = ::onError)
-                    //sveAnketeAdapter.updateAnkete(anketaListViewModel.getAnkete())
                 else if(spiner.selectedItem.toString()=="Sve moje ankete")
                     anketaListViewModel.getMyAnkete(onSuccess = ::onSuccess,
                         onError = ::onError)

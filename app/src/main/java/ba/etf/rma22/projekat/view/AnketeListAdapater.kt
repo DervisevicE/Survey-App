@@ -48,6 +48,11 @@ class AnketeListAdapater(
         var id: Int = context.resources.getIdentifier(statusBoja, "drawable", context.packageName)
         holder.anketaImage.setImageResource(id)
 
+        if (ankete[position].nazivIstrazivanja.isNullOrEmpty())
+            holder.istrazivanjeName.text = "Nepoznato"
+        holder.datum.text = "Nepoznato"
+
+
 
         /*if(statusBoja=="plava") holder.datum.text="Anketa urađena: " + formatirajDatum(ankete[position].datumRada)
         else if(statusBoja=="zelena") holder.datum.text="Vrijeme zatvaranja: " + formatirajDatum(ankete[position].datumKraja)
