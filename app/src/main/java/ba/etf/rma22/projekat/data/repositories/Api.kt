@@ -7,59 +7,61 @@ import retrofit2.http.*
 interface Api {
 
     //istrazivanje
-     @GET("istrazivanje")
-     suspend fun getIstrazivanja() : List<Istrazivanje>
+     @GET("/istrazivanje")
+     suspend fun getIstrazivanja(
+     @Query ("offset" ) offset: Int = 1
+    ) : List<Istrazivanje>
 
-     @GET("istrazivanje/{id}")
+     @GET("/istrazivanje/{id}")
      suspend fun dajIstrazivanjaSaId(
       @Path("id") id: Int
-     ) : List<Istrazivanje>
+     ) : Istrazivanje
 
-     @GET("grupa/{gid}/istrazivanje")
+     @GET("/grupa/{gid}/istrazivanje")
      suspend fun dajIstrazivanjaGrupeSaId(
-      @Path("gid") gid: Int
+      @Path("gid") id: Int
      ) : List<Istrazivanje>
 
      //grupa
-     @GET("anketa/{id}/grupa")
+     @GET("/anketa/{id}/grupa")
      suspend fun dajGrupeAnkete(
      @Path("id") id: Int
      ) : List<Grupa>
 
-     @POST("grupa/{gid}/student/{id}")
+     @POST("/grupa/{gid}/student/{id}")
      suspend fun upisiUGrupu(@Path("gid") gid : Int, @Path("id") id : String)
 
-     @GET("student/{id}/grupa")
+     @GET("/student/{id}/grupa")
      suspend fun dajUpisaneGrupe(
       @Path("id") id: String
      ) : List<Grupa>
 
-     @GET("grupa")
+     @GET("/grupa")
      suspend fun getGrupe() : List<Grupa>
 
-     @GET("grupa/{id}")
+     @GET("/grupa/{id}")
      suspend fun dajGrupeSaId(
       @Path("id") id: Int
      ) : List<Grupa>
 
      //anketa
-     @GET("anketa")
+     @GET("/anketa")
      suspend fun getAllAnkete(@Query("offset") offset:Int) : List<Anketa>
 
-     @GET("anketa/{id}")
+     @GET("/anketa/{id}")
      suspend fun getById(@Path("id") idAnkete : Int) : Anketa
 
-     @GET("grupa/{id}/ankete")
+     @GET("/grupa/{id}/ankete")
      suspend fun getUpisane(@Path("id") idGrupe : Int) : List<Anketa>
 
      //odgovor
-     @GET("student/{id}/anketataken/{ktid}/odgovori")
+     @GET("/student/{id}/anketataken/{ktid}/odgovori")
      suspend fun getOdgovoriAnketa(
       @Path("id") id: Int,
       @Path("ktid") ktid: Int
      ) : List<Odgovor>
 
-     @POST("student/{id}/anketataken/{ktid}/odgovor")
+     @POST("/student/{id}/anketataken/{ktid}/odgovor")
      suspend fun postaviOdgovorAnketa(
       @Path("id") id: Int,
       @Path("ktid") ktid: Int,
@@ -67,12 +69,12 @@ interface Api {
      ) : Response<Odgovor>
 
      //anketaTaken
-     @GET("student/{id}/anketataken")
+     @GET("/student/{id}/anketataken")
      suspend fun getPoceteAnkete(
       @Path("id") id : String
      ) : List<AnketaTaken>
 
-     @POST("student/{id}/anketa/{kid}")
+     @POST("/student/{id}/anketa/{kid}")
      suspend fun zapocniAnketu(
       @Path("kid") idAnkete: Int,
       @Path("id") id : String,
@@ -80,16 +82,16 @@ interface Api {
      ) : Response<AnketaTaken>
 
      //account
-     @GET("student/{id}")
+     @GET("/student/{id}")
      suspend fun dajStudentaSaHashom(
       @Path("id") id: String
      )
 
-     @DELETE("student/{id}/upisugrupepokusaji")
+     @DELETE("/student/{id}/upisugrupepokusaji")
      suspend fun ksks()
 
      //pitanje
-     @GET("anketa/{id}/pitanja")
+     @GET("/anketa/{id}/pitanja")
      suspend fun getPitanja(
       @Path("id") idAnkete: Int
      ) : List<Pitanje>

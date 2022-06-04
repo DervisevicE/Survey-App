@@ -1,39 +1,23 @@
-/*
 package ba.etf.rma22.projekat.viewmodel
 
-import ba.etf.rma22.projekat.data.istrazivanja
-import ba.etf.rma22.projekat.data.models.Anketa
+import ba.etf.rma22.projekat.data.models.Grupa
 import ba.etf.rma22.projekat.data.models.Istrazivanje
-import ba.etf.rma22.projekat.data.repositories.AnketaRepository
 import ba.etf.rma22.projekat.data.repositories.IstrazivanjeIGrupaRepository
-import ba.etf.rma22.projekat.data.repositories.IstrazivanjeRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class IstrazivanjeViewModel {
-
-   */
-/* fun getIstrazivanjeByGodina(godina: Int) : List<Istrazivanje>{
-        return IstrazivanjeRepository.getIstrazivanjeByGodina(godina)
-    }*//*
-
+class IstrazivanjeIGrupaViewModel {
 
     fun getIstrazivanjeByGodina(godina : Int, onSuccess : (istrazivanja : List<Istrazivanje>) -> Unit, onError : () -> Unit){
         GlobalScope.launch (Dispatchers.Main) {
-            val istrazivanja = IstrazivanjeRepository.getIstrazivanjeByGodina(godina)
+            val istrazivanja = IstrazivanjeIGrupaRepository.getIstrazivanjeByGodina(godina)
             when(istrazivanja){
                 is List<Istrazivanje> -> onSuccess.invoke(istrazivanja)
                 else -> onError.invoke()
             }
         }
     }
-
-   */
-/* fun getAll(): List<Istrazivanje>{
-        return IstrazivanjeRepository.getAll()
-    }*//*
-
 
     fun getAll(onSuccess : (istrazivanja : List<Istrazivanje>) -> Unit, onError : () -> Unit){
         GlobalScope.launch {
@@ -45,13 +29,14 @@ class IstrazivanjeViewModel {
         }
     }
 
-    fun getUpisani(): List<Istrazivanje>{
-        return IstrazivanjeRepository.getUpisani()
+    fun getGrupeZaIstrazivanje(idIstrazivanja: Int, onSuccess : (grupe : List<Grupa>) -> Unit, onError : () -> Unit){
+        GlobalScope.launch(Dispatchers.Main) {
+            val grupe = IstrazivanjeIGrupaRepository.getGrupeZaIstrazivanje(idIstrazivanja)
+            when(grupe){
+                is List<Grupa> -> onSuccess.invoke(grupe)
+                else -> onError.invoke()
+            }
+        }
     }
 
-   */
-/* fun dodajUMojaIstrazivanja(istrazivanje: String, godina: Int): Unit {
-        IstrazivanjeRepository.dodajUMojaIstrazivanja(istrazivanje,godina)
-    }*//*
-
-}*/
+}
