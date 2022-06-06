@@ -12,9 +12,9 @@ object OdgovorRepository {
         }
     }
 
-    /*fun postaviOdgovorAnketa(idAnketa: Int, idPitanje: Int, odgovor: Int){
-        return withContext(Dispatchers.IO){
-            return@withContext ApiAdapter.retrofit.postaviOdgovorAnketa(AccountRepository.getHash(),idAnketa, odgovor)
-        }
-    }*/
+    fun postaviOdgovorAnketa(idAnketa: Int, idPitanje: Int, odgovor: Int){
+       /* return withContext(Dispatchers.IO){
+            return@withContext null
+        }*/
+    }
 }
