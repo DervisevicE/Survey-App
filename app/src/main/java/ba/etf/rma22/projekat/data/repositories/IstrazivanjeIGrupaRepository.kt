@@ -70,4 +70,20 @@ object IstrazivanjeIGrupaRepository {
         }
     }
 
+     suspend fun upisiUGrupu(idGrupa: Int) : Boolean{
+        return withContext(Dispatchers.IO){
+            val pokusajUpisivanja : String =
+                ApiAdapter.retrofit.upisiUGrupu(idGrupa, AccountRepository.getHash()).toString()
+            if(pokusajUpisivanja.contains("Ne postoji") || pokusajUpisivanja.contains("not found"))
+                return@withContext false
+            return@withContext true
+        }
+    }
+
+    suspend fun getUpisaneGrupe() : List<Grupa>{
+        return withContext(Dispatchers.IO){
+            return@withContext ApiAdapter.retrofit.dajUpisaneGrupe(AccountRepository.getHash())
+        }
+    }
+
 }

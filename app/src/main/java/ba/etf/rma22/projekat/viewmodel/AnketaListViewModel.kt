@@ -36,7 +36,37 @@ class AnketaListViewModel {
         }
     }
 
-    fun getDone(): List<Anketa>{
+    fun getDone(onSuccess: (ankete: List<Anketa>) -> Unit, onError: () -> Unit){
+        GlobalScope.launch {
+            val ankete = AnketaRepository.getDone()
+            when(ankete){
+                is List<Anketa> -> onSuccess.invoke(ankete)
+                else -> onError.invoke()
+            }
+        }
+    }
+
+    fun getFuture(onSuccess: (ankete: List<Anketa>) -> Unit, onError: () -> Unit){
+        GlobalScope.launch {
+            val ankete = AnketaRepository.getFuture()
+            when(ankete){
+                is List<Anketa> -> onSuccess.invoke(ankete)
+                else -> onError.invoke()
+            }
+        }
+    }
+
+    fun getNotTaken(onSuccess: (ankete: List<Anketa>) -> Unit, onError: () -> Unit){
+        GlobalScope.launch {
+            val ankete = AnketaRepository.getNotTaken()
+            when(ankete){
+                is List<Anketa> -> onSuccess.invoke(ankete)
+                else -> onError.invoke()
+            }
+        }
+    }
+
+    /*fun getDone(): List<Anketa>{
         return AnketaRepository.getDone()
     }
 
@@ -47,7 +77,7 @@ class AnketaListViewModel {
     fun getNotTaken(): List<Anketa> {
         return AnketaRepository.getNotTaken()
     }
-
+*/
     fun dodajUMojeAnkete(istrazivanje: String, grupa: String): Unit {
         AnketaRepository.dodajUMojeAnkete(istrazivanje,grupa)
     }

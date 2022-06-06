@@ -45,7 +45,7 @@ object AnketaRepository {
         return ankete()
     }
 
-    fun getMyAnkete(): List<Anketa> {
+    /*fun getMyAnkete(): List<Anketa> {
         if (mojeAnkete.size == 0)
             return emptyList()
         return mojeAnkete
@@ -61,7 +61,7 @@ object AnketaRepository {
 
     fun getNotTaken(): List<Anketa> {
         return mojeAnkete.filter { anketa -> dajStatus(anketa) == "crvena" }.ifEmpty { emptyList() }
-    }
+    }*/
 
     private fun dajStatus(anketa: Anketa): String {
 
@@ -71,9 +71,9 @@ object AnketaRepository {
         //var date: Date = Calendar.getInstance().time
 
         if (anketa.datumRada == null) {
-            if (anketa.datumPocetka.before(date) && anketa.datumKraja.after(date)) return "zelena"
-            else if (anketa.datumKraja.before(date) && anketa.datumKraja.before(date)) return "crvena"
-            else if (anketa.datumPocetka.after(date) && anketa.datumKraja.after(date)) return "zuta"
+            if (anketa.datumPocetak.before(date) && anketa.datumKraj.after(date)) return "zelena"
+            else if (anketa.datumKraj.before(date) && anketa.datumKraj.before(date)) return "crvena"
+            else if (anketa.datumPocetak.after(date) && anketa.datumKraj.after(date)) return "zuta"
         }
         return "plava"
     }
@@ -113,7 +113,6 @@ object AnketaRepository {
     }
 
     suspend fun getUpisane() : List<Anketa>{
-        //lista svih anketa za GRUPE na kjima je STUDENT UPISAN
         return withContext(Dispatchers.IO){
             var anketeZaUpisaneGrupe = mutableListOf<Anketa>()
 
@@ -126,6 +125,18 @@ object AnketaRepository {
             }
             return@withContext anketeZaUpisaneGrupe
         }
+    }
+
+     suspend fun getDone() : List<Anketa>{
+        return getUpisane().filter { anketa -> dajStatus(anketa) == "plava" }.ifEmpty { emptyList() }
+    }
+
+     suspend fun getFuture(): List<Anketa> {
+        return getUpisane().filter { anketa -> dajStatus(anketa) == "zuta" }.ifEmpty { emptyList() }
+    }
+
+     suspend fun getNotTaken(): List<Anketa> {
+        return getUpisane().filter { anketa -> dajStatus(anketa) == "crvena" }.ifEmpty { emptyList() }
     }
 
 }

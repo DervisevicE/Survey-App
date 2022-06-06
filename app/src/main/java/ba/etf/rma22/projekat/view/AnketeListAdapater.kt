@@ -95,9 +95,9 @@ class AnketeListAdapater(
         //var date: Date = Calendar.getInstance().time
 
         if(anketa.datumRada==null){
-            if(anketa.datumPocetka.before(date) && anketa.datumKraja.after(date)) return "zelena"
-            else if(anketa.datumKraja.before(date) && anketa.datumKraja.before(date)) return "crvena"
-            else if (anketa.datumPocetka.after(date) && anketa.datumKraja.after(date)) return "zuta"
+            if(anketa.datumPocetak.before(date) && anketa.datumKraj.after(date)) return "zelena"
+            else if(anketa.datumKraj.before(date) && anketa.datumKraj.before(date)) return "crvena"
+            else if (anketa.datumPocetak.after(date) && anketa.datumKraj.after(date)) return "zuta"
         }
         return "plava"
     }
@@ -128,8 +128,8 @@ class AnketeListAdapater(
     }
 
     private fun uporediDatume(prvi: Anketa?, drugi: Anketa?) : Int {
-        if (prvi!!.datumPocetka.before(drugi!!.datumPocetka)) return -1
-        else if (prvi!!.datumPocetka.after(drugi!!.datumPocetka))return 1
+        if (prvi!!.datumPocetak.before(drugi!!.datumPocetak)) return -1
+        else if (prvi!!.datumPocetak.after(drugi!!.datumPocetak))return 1
         else return 0
     }
 

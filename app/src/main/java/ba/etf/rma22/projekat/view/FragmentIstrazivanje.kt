@@ -1,6 +1,7 @@
 package ba.etf.rma22.projekat.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,36 +51,40 @@ class FragmentIstrazivanje : Fragment(){
         odabirGodina.adapter=adapter
         }
 
-        adapter1 = ArrayAdapter(
+        /*adapter1 = ArrayAdapter(
             viewPom.context, android.R.layout.simple_spinner_item, ArrayList<Istrazivanje>()
         )
-        odabirIstrazivanja.adapter = adapter1
+        odabirIstrazivanja.adapter = adapter1*/
 
 
-         adapter2 = ArrayAdapter(
+         /*adapter2 = ArrayAdapter(
             viewPom.context,
             android.R.layout.simple_spinner_item,
             ArrayList<Grupa>()
         )
-        odabirGrupa.adapter = adapter2
+        odabirGrupa.adapter = adapter2*/
 
         odabirGodina.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 if (odabirGodina.selectedItem.toString()!=""){
                     odabirIstrazivanja.isEnabled=true
+                    adapter1 = ArrayAdapter(
+                        viewPom.context, android.R.layout.simple_spinner_item, ArrayList<Istrazivanje>()
+                    )
+                    odabirIstrazivanja.adapter = adapter1
                     updateIstrazivanja()
                 } else{
                     odabirIstrazivanja.isEnabled=false
                     odabirGrupa.isEnabled=false
-                    upisDugme.isEnabled=false
+                    //upisDugme.isEnabled=false
                     return;
                 }
-                updateGrupa()
-                postaviFunkcionalnostDugmica()
+                //updateGrupa()
+                //postaviFunkcionalnostDugmica()
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 updateIstrazivanja()
-                updateGrupa()
+                //updateGrupa()
             }
         }
 
@@ -87,12 +92,18 @@ class FragmentIstrazivanje : Fragment(){
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 if(odabirIstrazivanja.selectedItem.toString()!=""){
                     odabirGrupa.isEnabled=true
+                    adapter2 = ArrayAdapter(
+                        viewPom.context,
+                        android.R.layout.simple_spinner_item,
+                        ArrayList<Grupa>()
+                    )
+                    odabirGrupa.adapter = adapter2
                     updateGrupa()
                 } else {
                     odabirGrupa.isEnabled=false
                     //upisDugme.isEnabled=false
                 }
-                postaviFunkcionalnostDugmica()
+                //postaviFunkcionalnostDugmica()
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 updateGrupa()
@@ -103,12 +114,14 @@ class FragmentIstrazivanje : Fragment(){
 
        odabirGrupa.onItemSelectedListener= object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                postaviFunkcionalnostDugmica()
+                //postaviFunkcionalnostDugmica()
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 //upisDugme.isEnabled=false
             }
         }
+
+
 
         upisDugme.setOnClickListener{
             anketaViewModel.dodajUMojeAnkete(odabirIstrazivanja.selectedItem.toString(),odabirGrupa.selectedItem.toString())
@@ -129,10 +142,12 @@ class FragmentIstrazivanje : Fragment(){
     }
 
     private fun onSuccessZaIstrazivanja(istrazivanja: List<Istrazivanje>){
-        //GlobalScope.launch(Dispatchers.Main){
-            adapter1.addAll(istrazivanja)
-            adapter1.notifyDataSetChanged()
-        //}
+        GlobalScope.launch{
+            withContext(Dispatchers.Main){
+                adapter1.addAll(istrazivanja)
+                adapter1.notifyDataSetChanged()
+            }
+        }
     }
 
     private fun updateGrupa(){
@@ -151,21 +166,24 @@ class FragmentIstrazivanje : Fragment(){
     }
 
     private fun onSuccessZaGrupe(grupe : List<Grupa>){
-        adapter2.addAll(grupe)
-        adapter2.notifyDataSetChanged()
-    }
-
-    private fun onError(){
-        GlobalScope.launch(Dispatchers.IO){
+        GlobalScope.launch{
             withContext(Dispatchers.Main){
-                val toast = Toast.makeText(context, "Error", Toast.LENGTH_SHORT)
-                toast.show()
+                adapter2.addAll(grupe)
+                adapter2.notifyDataSetChanged()
             }
         }
     }
 
+    private fun onError(){
+        GlobalScope.launch{
+            withContext(Dispatchers.Main){
+                val toast = Toast.makeText(context, "Error", Toast.LENGTH_SHORT)
+                toast.show()
+            }
 
 
+        }
+    }
 
     private fun postaviFunkcionalnostDugmica(){
         /*upisDugme.isEnabled = odabirGodina.selectedItem.toString() != ""

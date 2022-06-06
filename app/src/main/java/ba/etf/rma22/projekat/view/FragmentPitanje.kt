@@ -3,6 +3,7 @@ package ba.etf.rma22.projekat.view
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,10 +30,11 @@ class FragmentPitanje : Fragment() {
         pitanja.text = tekstPitanja
 
        val opcijeOdgovora : ArrayList<String> = this.arguments?.getStringArrayList("odgovori") as ArrayList<String>
+        //val opcijeOdgovora = this.arguments?.getString("odgovori")
+        Log.v("opcije odg su ", opcijeOdgovora.toString())
+        //brojOpcija = opcijeOdgovora.size
 
-        brojOpcija = opcijeOdgovora.size
-
-        adapter =
+        /*adapter =
             activity?.let { ArrayAdapter(it, android.R.layout.simple_list_item_1,opcijeOdgovora) }!!
         odgovori.adapter = adapter
         odgovori.onItemClickListener =
@@ -41,7 +43,7 @@ class FragmentPitanje : Fragment() {
                 odabrani.setTextColor(Color.parseColor("#0000FF"))
                 brojOdgovorenih++
             }
-
+*/
         zaustavi.setOnClickListener {
             MainActivity.adapterZaVP.removeAll()
             MainActivity.adapterZaVP.add(0,FragmentAnkete())

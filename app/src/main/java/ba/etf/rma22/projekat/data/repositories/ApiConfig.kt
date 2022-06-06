@@ -4,13 +4,17 @@ import retrofit2.http.Url
 
 class ApiConfig {
 
-    private var Url : String = "https://rma22ws.herokuapp.com"
+    companion object{
+        var baseURL: String = "https://rma22ws.herokuapp.com"
+    }
+
+    //private var Url : String = "https://rma22ws.herokuapp.com"
 
     fun postaviBaseURL(baseUrl:String) : Unit{
-        Url = baseUrl
+        baseURL= baseUrl
     }
 
     fun getUrl() : String {
-        return Url
+        return baseURL
     }
 }

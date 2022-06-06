@@ -57,13 +57,13 @@ interface Api {
      //odgovor
      @GET("/student/{id}/anketataken/{ktid}/odgovori")
      suspend fun getOdgovoriAnketa(
-      @Path("id") id: Int,
+      @Path("id") id: String,
       @Path("ktid") ktid: Int
      ) : List<Odgovor>
 
      @POST("/student/{id}/anketataken/{ktid}/odgovor")
      suspend fun postaviOdgovorAnketa(
-      @Path("id") id: Int,
+      @Path("id") id: String,
       @Path("ktid") ktid: Int,
       @Body odgovor: Odgovor
      ) : Response<Odgovor>
@@ -77,9 +77,9 @@ interface Api {
      @POST("/student/{id}/anketa/{kid}")
      suspend fun zapocniAnketu(
       @Path("kid") idAnkete: Int,
-      @Path("id") id : String,
-      @Body anketaTaken: AnketaTaken
-     ) : Response<AnketaTaken>
+      @Path("id") id : String//,
+      //@Body anketaTaken: AnketaTaken
+     ) : AnketaTaken
 
      //account
      @GET("/student/{id}")

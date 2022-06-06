@@ -7,10 +7,12 @@ import ba.etf.rma22.projekat.data.models.Pitanje
 import ba.etf.rma22.projekat.data.models.PitanjeAnketa
 import ba.etf.rma22.projekat.data.staticdata.pitanja
 import ba.etf.rma22.projekat.data.staticdata.pitanjeAnekta
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 object PitanjeAnketaRepository {
 
-   fun getPitanja(nazivAnkete: String, nazivIstrazivanja: String): List<Pitanje>{
+   /*fun getPitanja(nazivAnkete: String, nazivIstrazivanja: String): List<Pitanje>{
 
         var pitanjaAnkete = pitanjeAnekta().filter { anketaPitanje -> anketaPitanje.anketa == nazivAnkete && anketaPitanje.nazivIstrazivanje == nazivIstrazivanja }.toList()
         var svaPitanja = pitanja()
@@ -39,6 +41,12 @@ object PitanjeAnketaRepository {
         }
 
         return moguciOdgovori
+    }*/
+
+    suspend fun getPitanja(idAnkete : Int) : List<Pitanje>{
+        return withContext(Dispatchers.IO){
+            return@withContext ApiAdapter.retrofit.getPitanja(idAnkete)
+        }
     }
 
 }
