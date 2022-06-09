@@ -51,19 +51,6 @@ class FragmentIstrazivanje : Fragment(){
         odabirGodina.adapter=adapter
         }
 
-        /*adapter1 = ArrayAdapter(
-            viewPom.context, android.R.layout.simple_spinner_item, ArrayList<Istrazivanje>()
-        )
-        odabirIstrazivanja.adapter = adapter1*/
-
-
-         /*adapter2 = ArrayAdapter(
-            viewPom.context,
-            android.R.layout.simple_spinner_item,
-            ArrayList<Grupa>()
-        )
-        odabirGrupa.adapter = adapter2*/
-
         odabirGodina.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 if (odabirGodina.selectedItem.toString()!=""){
@@ -120,8 +107,6 @@ class FragmentIstrazivanje : Fragment(){
                 //upisDugme.isEnabled=false
             }
         }
-
-
 
         upisDugme.setOnClickListener{
             anketaViewModel.dodajUMojeAnkete(odabirIstrazivanja.selectedItem.toString(),odabirGrupa.selectedItem.toString())

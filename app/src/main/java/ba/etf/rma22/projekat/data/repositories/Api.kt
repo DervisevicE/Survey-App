@@ -66,7 +66,7 @@ interface Api {
       @Path("id") id: String,
       @Path("ktid") ktid: Int,
       @Body odgovor: Odgovor
-     ) : Response<Odgovor>
+     ) : VratiOdgovor
 
      //anketaTaken
      @GET("/student/{id}/anketataken")

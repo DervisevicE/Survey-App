@@ -2,7 +2,10 @@ package ba.etf.rma22.projekat.viewmodel
 
 import ba.etf.rma22.projekat.ankete
 import ba.etf.rma22.projekat.data.models.Anketa
+import ba.etf.rma22.projekat.data.models.Istrazivanje
 import ba.etf.rma22.projekat.data.repositories.AnketaRepository
+import ba.etf.rma22.projekat.data.repositories.IstrazivanjeIGrupaRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -61,6 +64,16 @@ class AnketaListViewModel {
             val ankete = AnketaRepository.getNotTaken()
             when(ankete){
                 is List<Anketa> -> onSuccess.invoke(ankete)
+                else -> onError.invoke()
+            }
+        }
+    }
+
+    fun getById(anketaId : Int, onSuccess : (anketa : Anketa) -> Unit, onError : () -> Unit){
+        GlobalScope.launch (Dispatchers.Main) {
+            val anketa = AnketaRepository.getById(anketaId)
+            when(anketa){
+                is Anketa -> onSuccess.invoke(anketa)
                 else -> onError.invoke()
             }
         }

@@ -16,6 +16,7 @@ import ba.etf.rma22.projekat.MainActivity
 import ba.etf.rma22.projekat.R
 import ba.etf.rma22.projekat.data.models.Anketa
 import ba.etf.rma22.projekat.data.models.Pitanje
+import ba.etf.rma22.projekat.data.repositories.ApiAdapter
 import ba.etf.rma22.projekat.viewmodel.AnketaListViewModel
 import ba.etf.rma22.projekat.viewmodel.PitanjeAnketaViewModel
 import kotlinx.coroutines.Dispatchers
@@ -55,8 +56,6 @@ class FragmentAnkete : Fragment() {
                 spiner.adapter = adapter
             }
         }
-
-
 
         spiner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -104,50 +103,32 @@ class FragmentAnkete : Fragment() {
     private fun prikaziAnketu(anketa: Anketa){
          pitanjeAnketaViewModel.getPitanja(anketa.id, onSuccess = ::onSuccessZaPitanja,
             onError = ::onError)
+        Log.v("ime", anketa.naziv)
+
     }
 
-    fun onSuccessZaPitanja(pitanjaZaPrikazat: List<Pitanje>){
-        GlobalScope.launch(Dispatchers.Main){
-                var fragmenti : MutableList<Fragment> = arrayListOf()
-                if(pitanjaZaPrikazat.isNotEmpty()){
-                    MainActivity.adapterZaVP.removeAll()
-                    for(i in pitanjaZaPrikazat){
-                        var bundle = Bundle()
-                        bundle.putString("tekstPitanja", i.tekstPitanja)
-
-                        val odgovoriNaPitanje : ArrayList<String> = i.opcije as ArrayList<String>
-                        bundle.putStringArrayList("odgovori", odgovoriNaPitanje)
-
-                       /* val odgovoriNaPitanje = i.opcije
-                        for(opcija in odgovoriNaPitanje){
-                            bundle.putString("odgovori", opcija)
-                        }*/
-
-                        val fragmentPitanje = FragmentPitanje()
-                        fragmentPitanje.arguments = bundle
-                        fragmenti.add(fragmentPitanje)
-                    }
-                    /*val nazivAnkete = anketa.naziv
-                    val nazivIstrazivanja = anketa.nazivIstrazivanja
-                    val fragmentPredaj = FragmentPredaj()*/
-
-                    /*var bundleZaPredaj = Bundle()
-                    bundleZaPredaj.putString("nazivAnkete", nazivAnkete)
-                    bundleZaPredaj.putString("nazivIstrazivanja", nazivIstrazivanja)
-                    fragmentPredaj.arguments = bundleZaPredaj*/
-
-                    val fragmentPredaj = FragmentPredaj()
-                    fragmenti.add(fragmentPredaj)
-                    Log.v("pitanja za anketu su ", pitanjaZaPrikazat.toString())
-                    var pomBrojac=0
-                    for(i in fragmenti){
-                        MainActivity.adapterZaVP.add(pomBrojac,i)
-                        pomBrojac++
-                    }
-                }
+    private fun onSuccessZaPitanja(pitanjaZaPrikazat: List<Pitanje>){
+        var fragmenti : MutableList<Fragment> = arrayListOf()
+        Log.v("pitanja su", pitanjaZaPrikazat.toString())
+        var id: Int = pitanjaZaPrikazat.get(1).anketumId
+        if(pitanjaZaPrikazat.isNotEmpty()){
+            MainActivity.adapterZaVP.removeAll()
+            for(i in pitanjaZaPrikazat){
+                var bundle = Bundle()
+                bundle.putString("tekstPitanja", i.tekstPitanja)
+                var odgovoriNaPitanje = i.opcije as ArrayList
+                bundle.putStringArrayList("odgovori", odgovoriNaPitanje)
+                val fragmentPitanje = FragmentPitanje()
+                fragmentPitanje.arguments = bundle
+                fragmenti.add(fragmentPitanje)
+            }
+            var pomBrojac=0
+            for(i in fragmenti){
+                MainActivity.adapterZaVP.add(pomBrojac,i)
+                pomBrojac++
+            }
         }
     }
-
 
     /*private fun prikaziAnketu(anketa: Anketa) {
     var fragmenti : MutableList<Fragment> = arrayListOf()

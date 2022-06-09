@@ -29,12 +29,11 @@ class FragmentPitanje : Fragment() {
         val tekstPitanja = this.arguments?.getString("tekstPitanja")
         pitanja.text = tekstPitanja
 
-       val opcijeOdgovora : ArrayList<String> = this.arguments?.getStringArrayList("odgovori") as ArrayList<String>
-        //val opcijeOdgovora = this.arguments?.getString("odgovori")
-        Log.v("opcije odg su ", opcijeOdgovora.toString())
-        //brojOpcija = opcijeOdgovora.size
+        val opcijeOdgovora : ArrayList<String> = this.arguments?.getStringArrayList("odgovori") as ArrayList<String>
 
-        /*adapter =
+        brojOpcija = opcijeOdgovora.size
+
+        adapter =
             activity?.let { ArrayAdapter(it, android.R.layout.simple_list_item_1,opcijeOdgovora) }!!
         odgovori.adapter = adapter
         odgovori.onItemClickListener =
@@ -43,7 +42,7 @@ class FragmentPitanje : Fragment() {
                 odabrani.setTextColor(Color.parseColor("#0000FF"))
                 brojOdgovorenih++
             }
-*/
+
         zaustavi.setOnClickListener {
             MainActivity.adapterZaVP.removeAll()
             MainActivity.adapterZaVP.add(0,FragmentAnkete())

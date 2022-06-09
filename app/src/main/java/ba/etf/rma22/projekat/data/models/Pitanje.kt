@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class Pitanje(
     @SerializedName("id") val id : Int,
     @SerializedName("naziv") val naziv : String,
-    @SerializedName("tesktPitanja") val tekstPitanja: String,
-    @SerializedName("opcije") val opcije : List<String>
+    @SerializedName("tekstPitanja") val tekstPitanja: String,
+    @SerializedName("opcije") val opcije : List<String>,
+    @SerializedName("AnketumId") val anketumId : Int
 )

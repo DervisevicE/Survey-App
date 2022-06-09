@@ -45,24 +45,6 @@ object AnketaRepository {
         return ankete()
     }
 
-    /*fun getMyAnkete(): List<Anketa> {
-        if (mojeAnkete.size == 0)
-            return emptyList()
-        return mojeAnkete
-    }
-
-    fun getDone(): List<Anketa> {
-        return mojeAnkete.filter { anketa -> dajStatus(anketa) == "plava" }.ifEmpty { emptyList() }
-    }
-
-    fun getFuture(): List<Anketa> {
-        return mojeAnkete.filter { anketa -> dajStatus(anketa) == "zuta" }.ifEmpty { emptyList() }
-    }
-
-    fun getNotTaken(): List<Anketa> {
-        return mojeAnkete.filter { anketa -> dajStatus(anketa) == "crvena" }.ifEmpty { emptyList() }
-    }*/
-
     private fun dajStatus(anketa: Anketa): String {
 
         var cal: Calendar = Calendar.getInstance()

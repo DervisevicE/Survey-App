@@ -13,8 +13,8 @@ object OdgovorRepository {
     }
 
     fun postaviOdgovorAnketa(idAnketa: Int, idPitanje: Int, odgovor: Int){
-       /* return withContext(Dispatchers.IO){
-            return@withContext null
-        }*/
+       /*return withContext(Dispatchers.IO){
+           var progres = PitanjeAnketaRepository.
+       }*/
     }
 }
