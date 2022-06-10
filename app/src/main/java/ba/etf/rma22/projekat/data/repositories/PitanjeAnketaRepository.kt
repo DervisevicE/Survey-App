@@ -1,51 +1,50 @@
 package ba.etf.rma22.projekat.data.repositories
 
-import ba.etf.rma22.projekat.ankete
-import ba.etf.rma22.projekat.data.istrazivanja
 import ba.etf.rma22.projekat.data.models.Anketa
 import ba.etf.rma22.projekat.data.models.Pitanje
-import ba.etf.rma22.projekat.data.models.PitanjeAnketa
-import ba.etf.rma22.projekat.data.staticdata.pitanja
-import ba.etf.rma22.projekat.data.staticdata.pitanjeAnekta
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlin.math.roundToInt
 
 object PitanjeAnketaRepository {
 
-   /*fun getPitanja(nazivAnkete: String, nazivIstrazivanja: String): List<Pitanje>{
-
-        var pitanjaAnkete = pitanjeAnekta().filter { anketaPitanje -> anketaPitanje.anketa == nazivAnkete && anketaPitanje.nazivIstrazivanje == nazivIstrazivanja }.toList()
-        var svaPitanja = pitanja()
-
-        var pitanjaZaPrikazat : MutableList<Pitanje> = mutableListOf()
-
-        for(pitanje in svaPitanja){
-            for(anketaPitanje in pitanjaAnkete){
-                if(pitanje.naziv == anketaPitanje.naziv){
-                    pitanjaZaPrikazat.add(pitanje)
-                }
-            }
-        }
-        return pitanjaZaPrikazat
-    }
-
-    fun getOdgovori(nazivPitanja : String) : ArrayList<String> {
-        var pitanje = pitanja().filter { pitanje -> pitanje.naziv == nazivPitanja }.toList()
-        var moguciOdgovori : ArrayList<String> = arrayListOf()
-
-        for(o in pitanje){
-            var opcije : MutableList<String> = mutableListOf()
-            for(odg in o.opcije){
-                moguciOdgovori.add(odg)
-            }
-        }
-
-        return moguciOdgovori
-    }*/
-
     suspend fun getPitanja(idAnkete : Int) : List<Pitanje>{
         return withContext(Dispatchers.IO){
-            return@withContext ApiAdapter.retrofit.getPitanja(idAnkete)
+            var response = ApiAdapter.retrofit.getPitanja(idAnkete)
+            val responseBody = response.body()
+            return@withContext responseBody!!
+        }
+    }
+
+    suspend fun racunajPrekoOdgovora(idAnkete: Int, idPitanja : Int, odgovor : Int) : Int{
+        return withContext(Dispatchers.IO){
+         /*   val pokrenuteAnkete = TakeAnketaRepository.getPoceteAnkete()
+            var anketaId : Int = 0
+            if(pokrenuteAnkete!=null){
+                for(anketa in pokrenuteAnkete){
+                    if(anketa.id == idAnkete){
+                        anketaId = anketa.id
+                    }
+                }
+            }
+            val pitanjaAnkete = getPitanja(idAnkete)
+            val odgovoriAnkete = OdgovorRepository.getOdgovoriAnketa(idAnkete)
+            var vrijednostZaSvakiOdgovor : Float = 100.toFloat()/pitanjaAnkete.size
+            var pomocnaVrijednost = vrijednostZaSvakiOdgovor/100
+            var vrijednost : Int = 0
+            var brojac = 0
+            for(pitanje in pitanjaAnkete){
+                for(odg in odgovoriAnkete){
+                    if(odg.pitanjeId == pitanje.id){
+                        brojac++
+                    }
+                }
+            }
+            vrijednost  = (pomocnaVrijednost*brojac*10).roundToInt()
+            if(vrijednost%2!=0)
+                vrijednost+=1
+            vrijednost*=10*/
+            return@withContext 60
         }
     }
 

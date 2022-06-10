@@ -34,6 +34,7 @@ class FragmentAnkete : Fragment() {
     private var anketaListViewModel = AnketaListViewModel()
     private var pitanjeAnketaViewModel = PitanjeAnketaViewModel()
     private lateinit var spiner: Spinner
+    private var fragmentPredaj = FragmentPredaj()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view =  inflater.inflate(R.layout.fragment_ankete, container, false)
@@ -104,68 +105,36 @@ class FragmentAnkete : Fragment() {
          pitanjeAnketaViewModel.getPitanja(anketa.id, onSuccess = ::onSuccessZaPitanja,
             onError = ::onError)
         Log.v("ime", anketa.naziv)
-
+        var bundle = Bundle()
+        bundle.putString("nazivAnkete", anketa.naziv)
+        fragmentPredaj.arguments = bundle
     }
 
     private fun onSuccessZaPitanja(pitanjaZaPrikazat: List<Pitanje>){
         var fragmenti : MutableList<Fragment> = arrayListOf()
-        Log.v("pitanja su", pitanjaZaPrikazat.toString())
-        var id: Int = pitanjaZaPrikazat.get(1).anketumId
-        if(pitanjaZaPrikazat.isNotEmpty()){
-            MainActivity.adapterZaVP.removeAll()
-            for(i in pitanjaZaPrikazat){
-                var bundle = Bundle()
-                bundle.putString("tekstPitanja", i.tekstPitanja)
-                var odgovoriNaPitanje = i.opcije as ArrayList
-                bundle.putStringArrayList("odgovori", odgovoriNaPitanje)
-                val fragmentPitanje = FragmentPitanje()
-                fragmentPitanje.arguments = bundle
-                fragmenti.add(fragmentPitanje)
-            }
-            var pomBrojac=0
-            for(i in fragmenti){
-                MainActivity.adapterZaVP.add(pomBrojac,i)
-                pomBrojac++
-            }
-        }
-    }
-
-    /*private fun prikaziAnketu(anketa: Anketa) {
-    var fragmenti : MutableList<Fragment> = arrayListOf()
-        val statusAnkete = dajStatus(anketa)
-        if(statusAnkete!="zuta"  && anketaListViewModel.getMyAnkete().contains(anketa)){
-            val pitanjaZaPrikazat = pitanjeAnketaViewModel.getPitanja(anketa.naziv, anketa.nazivIstrazivanja)
-            if(pitanjaZaPrikazat.isNotEmpty()){
+        if(spiner.selectedItem!="Sve ankete") {
+            Log.v("pitanja su", pitanjaZaPrikazat.toString())
+            var id: Int = pitanjaZaPrikazat.get(1).anketumId
+            if (pitanjaZaPrikazat.isNotEmpty()) {
                 MainActivity.adapterZaVP.removeAll()
-                for(i in pitanjaZaPrikazat){
+                for (i in pitanjaZaPrikazat) {
                     var bundle = Bundle()
-                    bundle.putString("tekstPitanja", i.tekst)
-
-                    val odgovoriNaPitanje = pitanjeAnketaViewModel.getOdgovori(i.naziv)
+                    bundle.putString("tekstPitanja", i.tekstPitanja)
+                    var odgovoriNaPitanje = i.opcije as ArrayList
                     bundle.putStringArrayList("odgovori", odgovoriNaPitanje)
-
                     val fragmentPitanje = FragmentPitanje()
                     fragmentPitanje.arguments = bundle
                     fragmenti.add(fragmentPitanje)
                 }
-                val nazivAnkete = anketa.naziv
-                val nazivIstrazivanja = anketa.nazivIstrazivanja
-                val fragmentPredaj = FragmentPredaj()
-
-                var bundleZaPredaj = Bundle()
-                bundleZaPredaj.putString("nazivAnkete", nazivAnkete)
-                bundleZaPredaj.putString("nazivIstrazivanja", nazivIstrazivanja)
-                fragmentPredaj.arguments = bundleZaPredaj
-
                 fragmenti.add(fragmentPredaj)
-                var pomBrojac=0
-                for(i in fragmenti){
-                    MainActivity.adapterZaVP.add(pomBrojac,i)
+                var pomBrojac = 0
+                for (i in fragmenti) {
+                    MainActivity.adapterZaVP.add(pomBrojac, i)
                     pomBrojac++
                 }
             }
         }
-    }*/
+    }
 
     private fun dajStatus(anketa: Anketa): String {
         var cal: Calendar = Calendar.getInstance()

@@ -1,9 +1,6 @@
 package ba.etf.rma22.projekat.data.repositories
 
-import ba.etf.rma22.projekat.ankete
 import ba.etf.rma22.projekat.data.models.*
-import ba.etf.rma22.projekat.data.staticdata.pitanja
-import ba.etf.rma22.projekat.data.staticdata.pitanjeAnekta
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
@@ -15,16 +12,16 @@ object AnketaRepository {
 
     private var mojeAnkete: MutableList<Anketa>
 
-    fun izdvojiAnketu(istrazivanje: String, grupa: String): Anketa {
+   /* fun izdvojiAnketu(istrazivanje: String, grupa: String): Anketa {
         return getAll1().filter { anketa ->
             anketa.nazivIstrazivanja == istrazivanje &&
                     anketa.nazivGrupe == grupa
         }.first()
-    }
+    }*/
 
-    fun dodajUMojeAnkete(istrazivanje: String, grupa: String): Unit {
+   /* fun dodajUMojeAnkete(istrazivanje: String, grupa: String): Unit {
         mojeAnkete.add(izdvojiAnketu(istrazivanje, grupa))
-    }
+    }*/
 
     init {
         mojeAnkete = mutableListOf()
@@ -37,13 +34,6 @@ object AnketaRepository {
 */
     }
 
-    fun getAnkete(): List<Anketa> {
-        return ankete()
-    }
-
-    fun getAll1(): List<Anketa> {
-        return ankete()
-    }
 
     private fun dajStatus(anketa: Anketa): String {
 
@@ -120,5 +110,4 @@ object AnketaRepository {
      suspend fun getNotTaken(): List<Anketa> {
         return getUpisane().filter { anketa -> dajStatus(anketa) == "crvena" }.ifEmpty { emptyList() }
     }
-
 }

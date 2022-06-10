@@ -44,7 +44,8 @@ class FragmentPredaj : Fragment(){
         dugmePredaj.setOnClickListener {
 
             var bundle = Bundle()
-            bundle.putString("poruka", "Završili ste anketu" + nazivAnkete + " u okviru istraživanja " + nazivIstrazivanja + ".")
+            //bundle.putString("poruka", "Završili ste anketu" + nazivAnkete + " u okviru istraživanja " + nazivIstrazivanja + ".")
+            bundle.putString("poruka", "Završili ste anketu" + nazivAnkete + ".")
             val porukaFragment = FragmentPoruka()
             porukaFragment.arguments=bundle
             MainActivity.adapterZaVP.removeAll()

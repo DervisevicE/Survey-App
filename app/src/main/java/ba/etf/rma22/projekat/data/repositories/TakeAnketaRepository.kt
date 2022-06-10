@@ -16,10 +16,11 @@ object TakeAnketaRepository {
 
     suspend fun getPoceteAnkete() : List<AnketaTaken>?{
         return withContext(Dispatchers.IO){
-            val poceteAnkete = ApiAdapter.retrofit.getPoceteAnkete(AccountRepository.getHash())
-            if (poceteAnkete.isEmpty())
+            var response = ApiAdapter.retrofit.getPoceteAnkete()
+            val responseBody = response.body()
+            if (responseBody?.isEmpty() == true)
                 return@withContext null
-            return@withContext poceteAnkete
+            return@withContext responseBody
         }
     }
 }

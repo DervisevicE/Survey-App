@@ -1,6 +1,5 @@
 package ba.etf.rma22.projekat.viewmodel
 
-import ba.etf.rma22.projekat.ankete
 import ba.etf.rma22.projekat.data.models.Anketa
 import ba.etf.rma22.projekat.data.models.Istrazivanje
 import ba.etf.rma22.projekat.data.repositories.AnketaRepository
@@ -92,7 +91,7 @@ class AnketaListViewModel {
     }
 */
     fun dodajUMojeAnkete(istrazivanje: String, grupa: String): Unit {
-        AnketaRepository.dodajUMojeAnkete(istrazivanje,grupa)
+        //AnketaRepository.dodajUMojeAnkete(istrazivanje,grupa)
     }
 
 
