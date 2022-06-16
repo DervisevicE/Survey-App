@@ -85,7 +85,7 @@ interface Api {
      @GET("/student/{id}")
      suspend fun dajStudentaSaHashom(
       @Path("id") id: String
-     )
+     ) : Account
 
      @DELETE("/student/{id}/upisugrupepokusaji")
      suspend fun ksks()
