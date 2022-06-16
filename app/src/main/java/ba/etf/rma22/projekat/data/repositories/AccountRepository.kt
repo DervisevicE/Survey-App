@@ -15,18 +15,13 @@ object AccountRepository {
         //private lateinit var context : Context
     //}
 
-    fun getContext() : Context{
-        return MainActivity.context
-    }
+    var context: Context?=null
 
     suspend fun postaviHash(hash : String) : Boolean{
         return withContext(Dispatchers.Main) {
             acHash = hash
             try{
-                val db = Room.databaseBuilder(
-                    getContext(),
-                    AppDatabase::class.java, "RMA22DB"
-                ).build()
+                var db = AppDatabase.getInstance(AnketaRepository.context!!)
                 db.accountDao().obrisiAccount()
                 try{
                     db.accountDao().obrisiAccount()
@@ -48,14 +43,11 @@ object AccountRepository {
         return acHash
     }
 
-    suspend fun getAccount() : Account {
+    /*suspend fun getAccount() : Account {
         return withContext(Dispatchers.IO){
-            val db = Room.databaseBuilder(
-                getContext(),
-                AppDatabase::class.java, "RMA22DB"
-            ).build()
+            var db = AppDatabase.getInstance(AnketaRepository.context!!)
             val acc = db.accountDao().getAccount()
             return@withContext acc
         }
-    }
+    }*/
 }

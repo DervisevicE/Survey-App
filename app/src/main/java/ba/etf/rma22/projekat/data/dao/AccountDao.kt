@@ -8,7 +8,7 @@ import ba.etf.rma22.projekat.data.models.Account
 @Dao
 interface AccountDao {
     @Query("SELECT * FROM account")
-    suspend fun getAccount() : Account
+    suspend fun getAccount() : List<Account>
 
     @Insert
     suspend fun insertAccount(vararg acc: Account)

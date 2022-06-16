@@ -141,9 +141,9 @@ class FragmentAnkete : Fragment() {
         cal.set(LocalDate.now().year, LocalDate.now().monthValue, LocalDate.now().dayOfMonth)
         var date: Date = cal.time
         if(anketa.datumRada==null){
-            if(anketa.datumPocetak.before(date) && anketa.datumKraj.after(date)) return "zelena"
-            else if(anketa.datumKraj.before(date) && anketa.datumKraj.before(date)) return "crvena"
-            else if (anketa.datumPocetak.after(date) && anketa.datumKraj.after(date)) return "zuta"
+            if(anketa.datumPocetak!!.before(date) && anketa.datumKraj!!.after(date)) return "zelena"
+            else if(anketa.datumKraj!!.before(date) && anketa.datumKraj!!.before(date)) return "crvena"
+            else if (anketa.datumPocetak!!.after(date) && anketa.datumKraj!!.after(date)) return "zuta"
         }
         return "plava"
     }

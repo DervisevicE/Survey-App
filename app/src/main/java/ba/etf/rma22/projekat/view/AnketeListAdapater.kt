@@ -16,7 +16,6 @@ import java.time.LocalDate
 import java.util.*
 import java.util.stream.Collectors
 import kotlin.math.roundToInt
-import com.bumptech.glide.Glide
 
 class AnketeListAdapater(
     private var ankete: List<Anketa>,
@@ -98,9 +97,9 @@ class AnketeListAdapater(
         var date: Date = cal.time
        // if(anketa.datumRada==null){
             if(anketa.datumKraj!=null) {
-                if (anketa.datumPocetak.before(date) && anketa.datumKraj.after(date)) return "zelena"
-                else if (anketa.datumKraj.before(date) && anketa.datumKraj.before(date)) return "crvena"
-                else if (anketa.datumPocetak.after(date) && anketa.datumKraj.after(date)) return "zuta"
+                if (anketa.datumPocetak!!.before(date) && anketa.datumKraj!!.after(date)) return "zelena"
+                else if (anketa.datumKraj!!.before(date) && anketa.datumKraj!!.before(date)) return "crvena"
+                else if (anketa.datumPocetak!!.after(date) && anketa.datumKraj!!.after(date)) return "zuta"
             }
         //}
         /*if(anketa.datumRada!=null)
@@ -116,8 +115,8 @@ class AnketeListAdapater(
     }
 
     private fun uporediDatume(prvi: Anketa?, drugi: Anketa?) : Int {
-        if (prvi!!.datumPocetak.before(drugi!!.datumPocetak)) return -1
-        else if (prvi!!.datumPocetak.after(drugi!!.datumPocetak))return 1
+        if (prvi!!.datumPocetak!!.before(drugi!!.datumPocetak)) return -1
+        else if (prvi!!.datumPocetak!!.after(drugi!!.datumPocetak))return 1
         else return 0
     }
 

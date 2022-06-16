@@ -22,7 +22,7 @@ import java.net.URL
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class RepositoryUnitTest {
-    suspend fun obrisi(){
+/*    suspend fun obrisi(){
         var client: OkHttpClient = OkHttpClient()
         var builder: Request.Builder = Request.Builder()
             .url(URL(ApiConfig.baseURL + "/student/" + AccountRepository.acHash + "/upisugrupeipokusaji"))
@@ -110,13 +110,13 @@ class RepositoryUnitTest {
         var nepoceti = AnketaRepository.getUpisane()!!.minus(poceti)
         assertThat(nepoceti.size, `is`(2))
         assertThat(nepoceti, hasItem(nepoceti.first{it->it.naziv.contains("Anketa 5")}))
-    }
+    }*/
     @Test
     fun a9_provjeriAnkete() = runBlocking {
         assertThat(AnketaRepository.getAll()!!.size,CoreMatchers.equalTo(6))
     }
 
-    @Test
+ /*   @Test
     fun a9a_provjeriPitanja() = runBlocking {
         var ankete = AnketaRepository.getAll()
         assertThat(ankete,CoreMatchers.notNullValue())
@@ -155,6 +155,6 @@ class RepositoryUnitTest {
         var odgovorProperties = Odgovor::class.java.kotlin.members.map { it.name }
         var odgovorTProperties = listOf("id","odgovoreno")
         checkProperties(odgovorTProperties,odgovorProperties)
-    }
+    }*/
 
 }
