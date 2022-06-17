@@ -8,6 +8,6 @@ import com.google.gson.annotations.SerializedName
 @Entity
 data class Account (
     @PrimaryKey @SerializedName("id") val id : Int,
-    @ColumnInfo @SerializedName("student") val email : String,
-    @ColumnInfo @SerializedName("acHash") val acHash : String
+    @ColumnInfo(name = "E-mail") @SerializedName("student") val email : String,
+    @ColumnInfo(name = "Hash") @SerializedName("acHash") val acHash : String
 )

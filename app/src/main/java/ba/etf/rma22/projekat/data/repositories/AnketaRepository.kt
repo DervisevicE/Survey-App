@@ -119,11 +119,6 @@ object AnketaRepository {
                         db.anketaDao().insertAll(anketa)
                     }
                 }
-
-
-                /*for(anketa in anketeSaServisa){
-                    db.anketaDao().insertAll(anketa)
-                }*/
                 return@withContext anketeSaServisa
             }else{
                 var anketeSaBaze = db.anketaDao().getAll()
@@ -131,21 +126,6 @@ object AnketaRepository {
             }
         }
     }
-
-
- /*   private suspend fun upisiUBazu(context: Context, anketaSaServisa: Anketa) :String? {
-        return withContext(Dispatchers.IO){
-            try{
-
-                var db = AppDatabase.getInstance(AnketaRepository.context!!)
-                db.anketaDao().insertAll(anketaSaServisa)
-
-                return@withContext "success"
-            } catch (e: Exception){
-                return@withContext null
-            }
-        }
-    }*/
 
     suspend fun getByIdSaServera(id: Int) : Anketa? {
         return withContext(Dispatchers.IO){

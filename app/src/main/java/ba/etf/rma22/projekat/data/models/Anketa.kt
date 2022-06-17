@@ -11,18 +11,15 @@ import java.util.*
 @Entity
 data class Anketa(
     @PrimaryKey @SerializedName("id") var id: Int,
-    var nazivIstrazivanja: String?,
-    @ColumnInfo @SerializedName("naziv") var naziv: String,
-    @SerializedName("datumPocetak") var datumPocetak: Date?,
-    //@ColumnInfo var datumPocetakStr: String,
-    @SerializedName("datumKraj") var datumKraj: Date?,
-    //@ColumnInfo var datumKrajStr: String,
-    var datumRada: Date?,
-    //@ColumnInfo var datumRadaStr: String,
-    @ColumnInfo @SerializedName("trajanje") var trajanje: Int,
-    var nazivGrupe: String?,
-    var progres: Float?,
-    var upisana : Int = 0
+    @ColumnInfo(name = "NazivIstrazivanja")var nazivIstrazivanja: String?,
+    @ColumnInfo(name = "NazivAnkete") @SerializedName("naziv") var naziv: String,
+    @ColumnInfo(name = "DatumPocetak")@SerializedName("datumPocetak") var datumPocetak: Date?,
+    @ColumnInfo(name = "DatumKraj")@SerializedName("datumKraj") var datumKraj: Date?,
+    @ColumnInfo(name = "DatumRada") var datumRada: Date?,
+    @ColumnInfo(name = "Trajanje") @SerializedName("trajanje") var trajanje: Int,
+    @ColumnInfo(name = "NazivGrupe") var nazivGrupe: String?,
+    @ColumnInfo(name = "Progres") var progres: Float?,
+    @ColumnInfo(name = "Upisana") var upisana : Int = 0
     )
 {
    /* constructor() : this(-1, "","", null, "", null, "",

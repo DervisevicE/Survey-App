@@ -2,18 +2,18 @@ package ba.etf.rma22.projekat.data
 
 import android.content.Context
 import androidx.room.*
-import ba.etf.rma22.projekat.data.dao.AccountDao
-import ba.etf.rma22.projekat.data.dao.AnketaDao
-import ba.etf.rma22.projekat.data.dao.Converter
-import ba.etf.rma22.projekat.data.models.Account
-import ba.etf.rma22.projekat.data.models.Anketa
+import ba.etf.rma22.projekat.data.dao.*
+import ba.etf.rma22.projekat.data.models.*
 
-@Database(entities = arrayOf(Account::class, Anketa::class), version = 4 )
+@Database(entities = arrayOf(Account::class, Anketa::class, Pitanje::class, Istrazivanje::class, Grupa::class), version = 8 )
 @TypeConverters(Converter::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun accountDao(): AccountDao
     abstract fun anketaDao() : AnketaDao
+    abstract fun pitanjeDao() : PitanjeDao
+    abstract fun istrazivanjeDao() : IstrazivanjeDao
+    abstract fun grupaDao() : GrupaDao
 
     companion object {
         private var INSTANCE: AppDatabase? = null
