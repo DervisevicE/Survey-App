@@ -8,7 +8,7 @@ import ba.etf.rma22.projekat.data.dao.Converter
 import ba.etf.rma22.projekat.data.models.Account
 import ba.etf.rma22.projekat.data.models.Anketa
 
-@Database(entities = arrayOf(Account::class, Anketa::class), version = 3 )
+@Database(entities = arrayOf(Account::class, Anketa::class), version = 4 )
 @TypeConverters(Converter::class)
 abstract class AppDatabase : RoomDatabase() {
 

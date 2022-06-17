@@ -21,7 +21,8 @@ data class Anketa(
     //@ColumnInfo var datumRadaStr: String,
     @ColumnInfo @SerializedName("trajanje") var trajanje: Int,
     var nazivGrupe: String?,
-    var progres: Float?
+    var progres: Float?,
+    var upisana : Int = 0
     )
 {
    /* constructor() : this(-1, "","", null, "", null, "",

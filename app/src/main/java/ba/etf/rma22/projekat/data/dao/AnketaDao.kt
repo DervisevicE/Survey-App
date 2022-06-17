@@ -15,5 +15,8 @@ interface AnketaDao {
     suspend fun insertAll(vararg ankete: Anketa)
 
     @Query("SELECT * FROM anketa WHERE id =:anketaId")
-    suspend fun getAnketaById(anketaId : Int) : List<Anketa>
+    suspend fun getAnketaById(anketaId : Int) : Anketa
+
+    @Query("SELECT * FROM anketa WHERE upisana IS 1")
+    suspend fun getUpisaneAnkete() : List<Anketa>
 }

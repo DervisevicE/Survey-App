@@ -107,26 +107,25 @@ object AnketaRepository {
 
     suspend fun getAll() : List<Anketa>{
         return withContext(Dispatchers.IO){
-            //Log.v("dosla sam vodje", "")
-            if(isOnline(context!!)){
+            var db = AppDatabase.getInstance(context!!)
+            if(isOnline(context!!)==true){
                 var anketeSaServisa = getAllSaServisa()
-               /* if(context == null)
-                    Log.v("JEST", "")
-                else
-                    Log.v("KONTEKST CIST KO SUZA", "")*/
-                Log.v("SA SERVISA IH IMA", anketeSaServisa.size.toString())
-                var db = AppDatabase.getInstance(context!!)
+                var upisaneAnkete = getUpisane()
+
                 for(anketa in anketeSaServisa){
-                    db.anketaDao().insertAll(anketa)
+                    for(upisana in upisaneAnkete){
+                        if(anketa==upisana)
+                            anketa.upisana=1
+                        db.anketaDao().insertAll(anketa)
+                    }
                 }
 
-                //upisiUBazu(context!!, anketeSaServisa)
-                var x = db.anketaDao().getAll()
 
-                var anketeSaBaze = db.anketaDao().getAll()
-                return@withContext anketeSaBaze
+                /*for(anketa in anketeSaServisa){
+                    db.anketaDao().insertAll(anketa)
+                }*/
+                return@withContext anketeSaServisa
             }else{
-                var db = AppDatabase.getInstance(context!!)
                 var anketeSaBaze = db.anketaDao().getAll()
                 return@withContext anketeSaBaze
             }
@@ -148,7 +147,7 @@ object AnketaRepository {
         }
     }*/
 
-    suspend fun getById(id: Int) : Anketa? {
+    suspend fun getByIdSaServera(id: Int) : Anketa? {
         return withContext(Dispatchers.IO){
             try {
                 return@withContext ApiAdapter.retrofit.getById(id)
@@ -158,7 +157,21 @@ object AnketaRepository {
         }
     }
 
-    suspend fun getUpisane() : List<Anketa>{
+    suspend fun getById(id: Int) : Anketa{
+        return withContext(Dispatchers.IO){
+            var db = AppDatabase.getInstance(context!!)
+            if(isOnline(context!!)==true){
+                var anketa = getByIdSaServera(id)
+                db.anketaDao().insertAll(anketa!!)
+                return@withContext anketa
+            }else{
+                var anketaSaIdIzBaze = db.anketaDao().getAnketaById(id)
+                return@withContext anketaSaIdIzBaze
+            }
+        }
+    }
+
+    suspend fun getUpisaneSaServisa() : List<Anketa>{
         return withContext(Dispatchers.IO){
             var anketeZaUpisaneGrupe = mutableListOf<Anketa>()
 
@@ -170,6 +183,19 @@ object AnketaRepository {
                 }
             }
             return@withContext anketeZaUpisaneGrupe
+        }
+    }
+
+    suspend fun getUpisane() : List<Anketa>{
+        return withContext(Dispatchers.IO){
+            var db = AppDatabase.getInstance(context!!)
+            if(isOnline(context!!)){
+                var upisaneSaServisa = getUpisaneSaServisa()
+                return@withContext upisaneSaServisa
+            }else{
+                var anketeIzBaze = db.anketaDao().getUpisaneAnkete()
+                return@withContext anketeIzBaze
+            }
         }
     }
 
