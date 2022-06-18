@@ -18,10 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import ba.etf.rma22.projekat.data.AppDatabase
-import ba.etf.rma22.projekat.data.repositories.AccountRepository
-import ba.etf.rma22.projekat.data.repositories.AnketaRepository
-import ba.etf.rma22.projekat.data.repositories.IstrazivanjeIGrupaRepository
-import ba.etf.rma22.projekat.data.repositories.PitanjeAnketaRepository
+import ba.etf.rma22.projekat.data.repositories.*
 import ba.etf.rma22.projekat.view.*
 import ba.etf.rma22.projekat.viewmodel.AnketaListViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -42,13 +39,16 @@ class MainActivity : AppCompatActivity() {
         AccountRepository.context = this
         PitanjeAnketaRepository.context = this
         IstrazivanjeIGrupaRepository.context = this
+        TakeAnketaRepository.context = this
 
         connection = isOnline(this)
 
 
-      /*  val payload = intent.getStringExtra("payload")
+        val payload = intent.getStringExtra("payload")
         if(payload !=null)
-            AccountRepository.postaviHash(payload)*/
+            runBlocking {
+                AccountRepository.postaviHash(payload)
+            }
 
         viewPager = findViewById(R.id.pager)
          fragments = arrayListOf(

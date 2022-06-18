@@ -10,6 +10,6 @@ data class Pitanje(
     @SerializedName("naziv") val naziv : String,
     @SerializedName("tekstPitanja") val tekstPitanja: String,
     @SerializedName("opcije") val opcije : List<String>,
-    @SerializedName("AnketumId") val anketumId : Int,
+    @SerializedName("AnketumId") var anketumId : Int,
     @SerializedName("tacan") val tacan: Int
 ){}

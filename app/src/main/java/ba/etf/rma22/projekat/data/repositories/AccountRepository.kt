@@ -43,6 +43,7 @@ object AccountRepository {
         return acHash
     }
 
+
     /*suspend fun getAccount() : Account {
         return withContext(Dispatchers.IO){
             var db = AppDatabase.getInstance(AnketaRepository.context!!)

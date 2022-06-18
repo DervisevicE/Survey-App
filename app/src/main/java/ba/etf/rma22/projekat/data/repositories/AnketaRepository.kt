@@ -89,16 +89,16 @@ object AnketaRepository {
             if(MainActivity.connection){
                 var anketeSaServisa = getAllSaServisa()
                 var upisaneAnkete = getUpisaneSaServisa()
+                Log.v("SVE SA SERVISA SU", anketeSaServisa.size.toString())
 
                 for(anketa in anketeSaServisa){
                     if(upisaneAnkete.size!=0){
                         for(upisana in upisaneAnkete){
                             if(anketa==upisana)
                                 anketa.upisana=1
+                        }
                     }
-                        db.anketaDao().insertAll(anketa)
-                        Log.v("BVNSDJVNSDJFNSDŠ", "")
-                    }
+                    db.anketaDao().insertAll(anketa)
                 }
                 return@withContext anketeSaServisa
             }else{
@@ -150,11 +150,9 @@ object AnketaRepository {
     suspend fun getUpisane() : List<Anketa>{
         return withContext(Dispatchers.IO){
             var db = AppDatabase.getInstance(context!!)
-            Log.v("SAD SAM U UPISANIM", "")
 
             if(MainActivity.connection){
                 var upisaneSaServisa = getUpisaneSaServisa()
-                Log.v("SIZE UPISANIH SA SERVISA U OVOJ FJI JE", upisaneSaServisa.size.toString())
                 return@withContext upisaneSaServisa
             }else{
                 var anketeIzBaze = db.anketaDao().getUpisaneAnkete()

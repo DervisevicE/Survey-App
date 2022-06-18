@@ -1,5 +1,6 @@
 package ba.etf.rma22.projekat.data.repositories
 
+import android.content.Context
 import ba.etf.rma22.projekat.data.models.Odgovor
 import ba.etf.rma22.projekat.data.models.VratiZaOdgovor
 import kotlinx.coroutines.Dispatchers
@@ -8,7 +9,9 @@ import kotlin.math.roundToInt
 
 object OdgovorRepository {
 
-     suspend fun getOdgovoriAnketa(idAnketa: Int) : List<VratiZaOdgovor>{
+    var context: Context?=null
+
+    suspend fun getOdgovoriAnketa(idAnketa: Int) : List<VratiZaOdgovor>{
         return withContext(Dispatchers.IO){
             val pokusaj = TakeAnketaRepository.getPoceteAnkete()?.find { it.AnketumId == idAnketa }
             var listaOdgovora = listOf<VratiZaOdgovor>()

@@ -1,9 +1,13 @@
 package ba.etf.rma22.projekat.data.models
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity
 data class Odgovor(
-    @SerializedName("id") val id : Int,
-    @SerializedName("odgovoreno") val odgovoreno : Int,
-    @SerializedName("PitanjeId") val pitanjeId: Int
+    @PrimaryKey @SerializedName("id") val id : Int,
+    @ColumnInfo(name = "Odgovoreno") @SerializedName("odgovoreno") val odgovoreno : Int,
+    @ColumnInfo(name = "PitanjeId") @SerializedName("PitanjeId") val pitanjeId: Int
 )
