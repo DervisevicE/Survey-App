@@ -2,10 +2,13 @@ package ba.etf.rma22.projekat
 
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -14,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import ba.etf.rma22.projekat.data.AppDatabase
 import ba.etf.rma22.projekat.data.repositories.AccountRepository
 import ba.etf.rma22.projekat.data.repositories.AnketaRepository
 import ba.etf.rma22.projekat.data.repositories.IstrazivanjeIGrupaRepository
@@ -21,12 +25,14 @@ import ba.etf.rma22.projekat.data.repositories.PitanjeAnketaRepository
 import ba.etf.rma22.projekat.view.*
 import ba.etf.rma22.projekat.viewmodel.AnketaListViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
     companion object{
         lateinit var adapterZaVP : ViewPagerAdapter
         lateinit var viewPager : ViewPager2
         lateinit var fragments : ArrayList<Fragment>
+        var connection:Boolean = true
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +42,8 @@ class MainActivity : AppCompatActivity() {
         AccountRepository.context = this
         PitanjeAnketaRepository.context = this
         IstrazivanjeIGrupaRepository.context = this
+
+        connection = isOnline(this)
 
 
       /*  val payload = intent.getStringExtra("payload")
@@ -60,5 +68,32 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
+        var db = AppDatabase.getInstance(this)
+        runBlocking {
+            db.anketaDao().getAll()
+        }
+    }
+
+    private fun isOnline(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (connectivityManager != null) {
+            val capabilities =
+                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+            if (capabilities != null) {
+                if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
+                    return true
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
+                    return true
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
+                    return true
+                }
+            }
+        }
+        return false
     }
 }

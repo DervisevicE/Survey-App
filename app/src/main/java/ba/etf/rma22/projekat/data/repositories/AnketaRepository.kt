@@ -32,28 +32,6 @@ object AnketaRepository {
         mojeAnkete.add(izdvojiAnketu(istrazivanje, grupa))
     }*/
 
-    fun isOnline(context: Context): Boolean {
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (connectivityManager != null) {
-            val capabilities =
-                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-            if (capabilities != null) {
-                if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
-                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
-                    return true
-                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
-                    return true
-                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
-                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
-                    return true
-                }
-            }
-        }
-        return false
-    }
-
     init {
         mojeAnkete = mutableListOf()
         /*mojeAnkete.add(izdvojiAnketu("Moje istrazivanje", "G1"))
@@ -108,15 +86,18 @@ object AnketaRepository {
     suspend fun getAll() : List<Anketa>{
         return withContext(Dispatchers.IO){
             var db = AppDatabase.getInstance(context!!)
-            if(isOnline(context!!)==true){
+            if(MainActivity.connection){
                 var anketeSaServisa = getAllSaServisa()
-                var upisaneAnkete = getUpisane()
+                var upisaneAnkete = getUpisaneSaServisa()
 
                 for(anketa in anketeSaServisa){
-                    for(upisana in upisaneAnkete){
-                        if(anketa==upisana)
-                            anketa.upisana=1
+                    if(upisaneAnkete.size!=0){
+                        for(upisana in upisaneAnkete){
+                            if(anketa==upisana)
+                                anketa.upisana=1
+                    }
                         db.anketaDao().insertAll(anketa)
+                        Log.v("BVNSDJVNSDJFNSDŠ", "")
                     }
                 }
                 return@withContext anketeSaServisa
@@ -140,7 +121,7 @@ object AnketaRepository {
     suspend fun getById(id: Int) : Anketa{
         return withContext(Dispatchers.IO){
             var db = AppDatabase.getInstance(context!!)
-            if(isOnline(context!!)==true){
+            if(MainActivity.connection){
                 var anketa = getByIdSaServera(id)
                 db.anketaDao().insertAll(anketa!!)
                 return@withContext anketa
@@ -169,8 +150,11 @@ object AnketaRepository {
     suspend fun getUpisane() : List<Anketa>{
         return withContext(Dispatchers.IO){
             var db = AppDatabase.getInstance(context!!)
-            if(isOnline(context!!)){
+            Log.v("SAD SAM U UPISANIM", "")
+
+            if(MainActivity.connection){
                 var upisaneSaServisa = getUpisaneSaServisa()
+                Log.v("SIZE UPISANIH SA SERVISA U OVOJ FJI JE", upisaneSaServisa.size.toString())
                 return@withContext upisaneSaServisa
             }else{
                 var anketeIzBaze = db.anketaDao().getUpisaneAnkete()

@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
+import ba.etf.rma22.projekat.MainActivity
 import ba.etf.rma22.projekat.data.AppDatabase
 import ba.etf.rma22.projekat.data.models.Grupa
 import ba.etf.rma22.projekat.data.models.Istrazivanje
@@ -14,27 +15,6 @@ object IstrazivanjeIGrupaRepository {
 
     var context: Context?=null
 
-    fun isOnline(context: Context): Boolean {
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (connectivityManager != null) {
-            val capabilities =
-                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-            if (capabilities != null) {
-                if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
-                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
-                    return true
-                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
-                    return true
-                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
-                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
-                    return true
-                }
-            }
-        }
-        return false
-    }
 
     suspend fun getIstrazivanja(offset : Int) : List<Istrazivanje> {
         return withContext(Dispatchers.IO){
@@ -62,7 +42,7 @@ object IstrazivanjeIGrupaRepository {
     suspend fun getIstrazivanja() : List<Istrazivanje>{
         return withContext(Dispatchers.IO){
             var db = AppDatabase.getInstance(context!!)
-            if(isOnline(context!!)){
+            if(MainActivity.connection){
                 var istrazivanjaSaServisa = getIstrazivanjaSaServisa()
 
                 for(istrazivanje in istrazivanjaSaServisa){
@@ -93,7 +73,7 @@ object IstrazivanjeIGrupaRepository {
     suspend fun getIstrazivanjeByGodina(godina: Int) : List<Istrazivanje>{
         return withContext(Dispatchers.IO){
             var db = AppDatabase.getInstance(context!!)
-            if (isOnline(context!!)){
+            if (MainActivity.connection){
                 var saServisa = getIstrazivanjeByGodinaSaServisa(godina)
                 for(istrazivanje in saServisa)
                     db.istrazivanjeDao().insertAll(istrazivanje)
@@ -114,16 +94,18 @@ object IstrazivanjeIGrupaRepository {
     suspend fun getGrupe() : List<Grupa>{
         return withContext(Dispatchers.IO){
             var db = AppDatabase.getInstance(context!!)
-            if (isOnline(context!!)){
+            if (MainActivity.connection){
                 var saServisa = getGrupeSaServisa()
                 var upisaneSaServisa = getUpisaneGrupeSaServisa()
 
                 for(grupa in saServisa){
-                    for(upisana in upisaneSaServisa){
-                        if(grupa == upisana)
-                            grupa.upisana=1
-                        db.grupaDao().insertAll(grupa)
+                    if(upisaneSaServisa.size!=0) {
+                        for (upisana in upisaneSaServisa) {
+                            if (grupa == upisana)
+                                grupa.upisana = 1
+                        }
                     }
+                    db.grupaDao().insertAll(grupa)
                 }
                 return@withContext saServisa
             }else{
@@ -150,7 +132,7 @@ object IstrazivanjeIGrupaRepository {
 
      suspend fun upisiUGrupu(idGrupa: Int) : Boolean{
         return withContext(Dispatchers.IO){
-            if(isOnline(context!!)){
+            if(MainActivity.connection){
                 val pokusajUpisivanja : String =
                     ApiAdapter.retrofit.upisiUGrupu(idGrupa, AccountRepository.getHash()).toString()
                 if(pokusajUpisivanja.contains("Ne postoji") || pokusajUpisivanja.contains("not found"))
@@ -171,7 +153,7 @@ object IstrazivanjeIGrupaRepository {
     suspend fun getUpisaneGrupe() : List<Grupa>{
         return withContext(Dispatchers.IO){
             var db = AppDatabase.getInstance(context!!)
-            if(isOnline(context!!)){
+            if(MainActivity.connection){
                 var saServisa = getGrupeSaServisa()
 
                 for(grupa in saServisa){

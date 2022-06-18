@@ -5,7 +5,7 @@ import androidx.room.*
 import ba.etf.rma22.projekat.data.dao.*
 import ba.etf.rma22.projekat.data.models.*
 
-@Database(entities = arrayOf(Account::class, Anketa::class, Pitanje::class, Istrazivanje::class, Grupa::class), version = 8 )
+@Database(entities = arrayOf(Account::class, Anketa::class, Pitanje::class, Istrazivanje::class, Grupa::class), version = 9 )
 @TypeConverters(Converter::class)
 abstract class AppDatabase : RoomDatabase() {
 
@@ -21,6 +21,7 @@ abstract class AppDatabase : RoomDatabase() {
             if (INSTANCE == null) {
                 synchronized(AppDatabase::class) {
                     INSTANCE = buildRoomDB(context)
+                    println("BAZA BAZA BAZA")
                 }
             }
             return INSTANCE!!

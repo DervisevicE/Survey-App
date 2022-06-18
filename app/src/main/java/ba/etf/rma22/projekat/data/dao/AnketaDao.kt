@@ -12,7 +12,7 @@ interface AnketaDao {
     suspend fun getAll() : List<Anketa>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(vararg ankete: Anketa)
+    suspend fun insertAll(vararg anketa: Anketa)
 
     @Query("SELECT * FROM anketa WHERE id =:anketaId")
     suspend fun getAnketaById(anketaId : Int) : Anketa
