@@ -8,9 +8,16 @@ import java.util.*
 
 @Entity
 data class AnketaTaken(
-    @PrimaryKey @SerializedName("id") val id : Int,
-    @ColumnInfo(name="Student") @SerializedName("student") val student : String,
-    @ColumnInfo(name="Proges") @SerializedName("progres") val progres : Float?,
-    @ColumnInfo(name="DatumRada") @SerializedName("datumRada") val datumRada : Date?,
-    @ColumnInfo(name="AnketumId") @SerializedName("AnketumId") val AnketumId : Int
-)
+    @PrimaryKey @SerializedName("id") var id : Int,
+    @ColumnInfo(name="student") @SerializedName("student") var student : String,
+    @ColumnInfo(name="progres") @SerializedName("progres") var progres : Float?,
+    @ColumnInfo(name="datumRada") @SerializedName("datumRada") var datumRada : Date?,
+    @ColumnInfo(name="AnketumId") @SerializedName("AnketumId") var AnketumId : Int
+){
+    override fun equals(other: Any?): Boolean {
+        return other is Anketa && this.AnketumId == other.id
+    }
+    override fun hashCode() : Int{
+        return super.hashCode()
+    }
+}

@@ -13,6 +13,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,19 +37,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         AnketaRepository.context = this
-        AccountRepository.context = this
+       /* AccountRepository.context = this
         PitanjeAnketaRepository.context = this
         IstrazivanjeIGrupaRepository.context = this
-        TakeAnketaRepository.context = this
+        TakeAnketaRepository.context = this*/
 
         connection = isOnline(this)
 
 
         val payload = intent.getStringExtra("payload")
-        if(payload !=null)
-            runBlocking {
-                AccountRepository.postaviHash(payload)
-            }
+        if(payload !=null) {
+            val toast = Toast.makeText(this, payload, Toast.LENGTH_SHORT)
+            toast.show()
+        }
 
         viewPager = findViewById(R.id.pager)
          fragments = arrayListOf(

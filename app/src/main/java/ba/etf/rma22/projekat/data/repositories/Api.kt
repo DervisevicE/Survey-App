@@ -42,7 +42,7 @@ interface Api {
      @GET("/grupa/{id}")
      suspend fun dajGrupeSaId(
       @Path("id") id: Int
-     ) : List<Grupa>
+     ) : Grupa
 
      //anketa
      @GET("/anketa")
@@ -59,7 +59,7 @@ interface Api {
      suspend fun getOdgovoriAnketa(
       @Path("ktid") ktid: Int,
       @Path("id") id: String = AccountRepository.getHash()
-     ) :List<VratiZaOdgovor>
+     ) :List<Odgovor>
 
      @POST("/student/{id}/anketataken/{ktid}/odgovor")
      suspend fun postaviOdgovorAnketa(

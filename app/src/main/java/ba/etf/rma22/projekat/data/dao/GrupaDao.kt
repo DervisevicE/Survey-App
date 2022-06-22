@@ -16,6 +16,6 @@ interface GrupaDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg grupa: Grupa)
 
-    @Query("SELECT * FROM grupa WHERE upisana IS 1")
+    @Query("SELECT * FROM grupa WHERE upisana=1")
     suspend fun getUpisane() : List<Grupa>
 }

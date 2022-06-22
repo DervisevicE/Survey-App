@@ -15,8 +15,6 @@ object AccountRepository {
         //private lateinit var context : Context
     //}
 
-    var context: Context?=null
-
     suspend fun postaviHash(hash : String) : Boolean{
         return withContext(Dispatchers.Main) {
             acHash = hash

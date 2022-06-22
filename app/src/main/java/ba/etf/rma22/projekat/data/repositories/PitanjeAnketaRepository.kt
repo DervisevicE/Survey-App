@@ -11,8 +11,6 @@ import kotlin.math.roundToInt
 
 object PitanjeAnketaRepository {
 
-    var context : Context?=null
-
     suspend fun getPitanjaSaServisa(idAnkete : Int) : List<Pitanje>{
         return withContext(Dispatchers.IO){
             var response = ApiAdapter.retrofit.getPitanja(idAnkete)
@@ -23,7 +21,7 @@ object PitanjeAnketaRepository {
 
     suspend fun getPitanja(idAnkete: Int) : List<Pitanje>{
         return withContext(Dispatchers.IO){
-            var db = AppDatabase.getInstance(context!!)
+            var db = AppDatabase.getInstance(AnketaRepository.context!!)
             if(MainActivity.connection){
                 var pitanjaZaAnketuSaServisa = getPitanjaSaServisa(idAnkete)
 

@@ -5,7 +5,7 @@ import androidx.room.*
 import ba.etf.rma22.projekat.data.dao.*
 import ba.etf.rma22.projekat.data.models.*
 
-@Database(entities = arrayOf(Account::class, Anketa::class, Pitanje::class, Istrazivanje::class, Grupa::class, AnketaTaken::class, Odgovor::class), version = 12 )
+@Database(entities = arrayOf(Account::class, Anketa::class, Pitanje::class, Istrazivanje::class, Grupa::class, AnketaTaken::class, Odgovor::class), version = 20 )
 @TypeConverters(Converter::class)
 abstract class AppDatabase : RoomDatabase() {
 

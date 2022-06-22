@@ -13,12 +13,20 @@ import kotlinx.coroutines.withContext
 
 object IstrazivanjeIGrupaRepository {
 
-    var context: Context?=null
-
-
     suspend fun getIstrazivanja(offset : Int) : List<Istrazivanje> {
         return withContext(Dispatchers.IO){
-            return@withContext ApiAdapter.retrofit.getIstrazivanja(offset)
+            var db = AppDatabase.getInstance(AnketaRepository.context!!)
+            if(MainActivity.connection){
+                var istrazivanjaSaServisa = ApiAdapter.retrofit.getIstrazivanja(offset)
+
+                for(istrazivanje in istrazivanjaSaServisa){
+                    db.istrazivanjeDao().insertAll(istrazivanje)
+                }
+                return@withContext istrazivanjaSaServisa
+            }else{
+                var istrazivanjaIzBaze = db.istrazivanjeDao().getIstrazivanja()
+                return@withContext istrazivanjaIzBaze
+            }
         }
     }
 
@@ -41,7 +49,7 @@ object IstrazivanjeIGrupaRepository {
 
     suspend fun getIstrazivanja() : List<Istrazivanje>{
         return withContext(Dispatchers.IO){
-            var db = AppDatabase.getInstance(context!!)
+            var db = AppDatabase.getInstance(AnketaRepository.context!!)
             if(MainActivity.connection){
                 var istrazivanjaSaServisa = getIstrazivanjaSaServisa()
 
@@ -72,7 +80,7 @@ object IstrazivanjeIGrupaRepository {
 
     suspend fun getIstrazivanjeByGodina(godina: Int) : List<Istrazivanje>{
         return withContext(Dispatchers.IO){
-            var db = AppDatabase.getInstance(context!!)
+            var db = AppDatabase.getInstance(AnketaRepository.context!!)
             if (MainActivity.connection){
                 var saServisa = getIstrazivanjeByGodinaSaServisa(godina)
                 for(istrazivanje in saServisa)
@@ -93,7 +101,7 @@ object IstrazivanjeIGrupaRepository {
 
     suspend fun getGrupe() : List<Grupa>{
         return withContext(Dispatchers.IO){
-            var db = AppDatabase.getInstance(context!!)
+            var db = AppDatabase.getInstance(AnketaRepository.context!!)
             if (MainActivity.connection){
                 var saServisa = getGrupeSaServisa()
                 var upisaneSaServisa = getUpisaneGrupeSaServisa()
@@ -132,16 +140,57 @@ object IstrazivanjeIGrupaRepository {
 
      suspend fun upisiUGrupu(idGrupa: Int) : Boolean{
         return withContext(Dispatchers.IO){
+            var db = AppDatabase.getInstance(AnketaRepository.context!!)
             if(MainActivity.connection){
                 val pokusajUpisivanja : String =
                     ApiAdapter.retrofit.upisiUGrupu(idGrupa, AccountRepository.getHash()).toString()
                 if(pokusajUpisivanja.contains("Ne postoji") || pokusajUpisivanja.contains("not found"))
                     return@withContext false
-                return@withContext true
+                else {
+                    var grupa = ApiAdapter.retrofit.dajGrupeSaId(idGrupa)
+                    if(grupa!=null){
+                        grupa.upisana = 1
+                        db.grupaDao().insertAll(grupa)
+
+                        var anketaZaGrupu = ApiAdapter.retrofit.getUpisane(grupa.id)
+                        if(anketaZaGrupu!=null){
+                            for (anketa in anketaZaGrupu){
+                                anketa.upisana = 1
+                                db.anketaDao().insertAll(anketa)
+                            }
+                        }
+                    }
+                    return@withContext true
+                }
             }else{
                 return@withContext false
             }
         }
+
+
+
+         /*try{
+                var db = AppDatabase.getInstance(AnketaRepository.context!!)
+                ApiAdapter.retrofit.upisiUGrupu(idGrupa, AccountRepository.getHash())
+                var grupa = ApiAdapter.retrofit.dajGrupeSaId(idGrupa)
+                if(grupa!=null) {
+                    grupa.upisana = 1
+                    db.grupaDao().insertAll(grupa)
+
+                    var anketaZaGrupu = ApiAdapter.retrofit.getUpisane(grupa.id)
+                    if (anketaZaGrupu != null) {
+                        for (anketa in anketaZaGrupu) {
+                            anketa.upisana = 1
+                            db.anketaDao().insertAll(anketa)
+                        }
+                    }
+                }
+
+                return@withContext true
+
+            }catch(e: Exception){
+                return@withContext false
+            }*/
     }
 
     suspend fun getUpisaneGrupeSaServisa() : List<Grupa>{
@@ -152,9 +201,10 @@ object IstrazivanjeIGrupaRepository {
 
     suspend fun getUpisaneGrupe() : List<Grupa>{
         return withContext(Dispatchers.IO){
-            var db = AppDatabase.getInstance(context!!)
+            var db = AppDatabase.getInstance(AnketaRepository.context!!)
             if(MainActivity.connection){
-                var saServisa = getGrupeSaServisa()
+                var saServisa = getUpisaneGrupeSaServisa()
+                Log.v("SA SERVISA JE", saServisa.size.toString())
 
                 for(grupa in saServisa){
                     grupa.upisana = 1

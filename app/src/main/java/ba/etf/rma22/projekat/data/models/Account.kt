@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 
 @Entity
 data class Account (
-    @PrimaryKey @SerializedName("id") val id : Int,
-    @ColumnInfo(name = "E-mail") @SerializedName("student") val email : String,
-    @ColumnInfo(name = "Hash") @SerializedName("acHash") val acHash : String
+    @PrimaryKey @SerializedName("id") var id : Int,
+    @ColumnInfo(name = "student") @SerializedName("student") var email : String,
+    @ColumnInfo(name = "acHash") @SerializedName("acHash") var acHash : String
 )

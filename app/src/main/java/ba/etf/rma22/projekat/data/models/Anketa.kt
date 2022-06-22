@@ -12,16 +12,21 @@ import java.util.*
 data class Anketa(
     @PrimaryKey @SerializedName("id") var id: Int,
     @ColumnInfo(name = "NazivIstrazivanja")var nazivIstrazivanja: String?,
-    @ColumnInfo(name = "NazivAnkete") @SerializedName("naziv") var naziv: String,
-    @ColumnInfo(name = "DatumPocetak")@SerializedName("datumPocetak") var datumPocetak: Date?,
-    @ColumnInfo(name = "DatumKraj")@SerializedName("datumKraj") var datumKraj: Date?,
+    @ColumnInfo(name = "naziv") @SerializedName("naziv") var naziv: String,
+    @ColumnInfo(name = "datumPocetak")@SerializedName("datumPocetak") var datumPocetak: Date?,
+    @ColumnInfo(name = "datumKraj")@SerializedName("datumKraj") var datumKraj: Date?,
     @ColumnInfo(name = "DatumRada") var datumRada: Date?,
-    @ColumnInfo(name = "Trajanje") @SerializedName("trajanje") var trajanje: Int,
+    @ColumnInfo(name = "trajanje") @SerializedName("trajanje") var trajanje: Int,
     @ColumnInfo(name = "NazivGrupe") var nazivGrupe: String?,
     @ColumnInfo(name = "Progres") var progres: Float?,
     @ColumnInfo(name = "Upisana") var upisana : Int = 0
     )
 {
-   /* constructor() : this(-1, "","", null, "", null, "",
-    null, "", 0, "",0F)*/
+    override fun hashCode() : Int{
+        return super.hashCode()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return other is Anketa && this.naziv == other.naziv && this.nazivIstrazivanja == other.nazivIstrazivanja
+    }
 }

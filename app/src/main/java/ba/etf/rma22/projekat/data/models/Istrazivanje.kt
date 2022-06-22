@@ -7,9 +7,9 @@ import com.google.gson.annotations.SerializedName
 
 @Entity
 data class Istrazivanje(
-    @PrimaryKey @SerializedName("id") val id : Int,
-    @ColumnInfo(name ="Naziv") @SerializedName("naziv") val naziv : String,
-    @ColumnInfo(name ="Godina") @SerializedName("godina") val godina : Int
+    @PrimaryKey @SerializedName("id") var id : Int,
+    @ColumnInfo(name ="naziv") @SerializedName("naziv") var naziv : String,
+    @ColumnInfo(name ="godina") @SerializedName("godina") var godina : Int
 ){
     override fun toString(): String {
         return "$naziv"

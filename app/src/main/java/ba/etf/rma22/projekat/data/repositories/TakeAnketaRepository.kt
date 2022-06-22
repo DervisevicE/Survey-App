@@ -9,11 +9,9 @@ import kotlinx.coroutines.withContext
 
 object TakeAnketaRepository {
 
-    var context: Context?=null
-
     suspend fun zapocniAnketu(idAnketa: Int) : AnketaTaken?{
         return withContext(Dispatchers.IO){
-            var db = AppDatabase.getInstance(context!!)
+            var db = AppDatabase.getInstance(AnketaRepository.context!!)
             if(MainActivity.connection){
                 /*var anketaSaId = AnketaRepository.getByIdSaServera(idAnketa)
                 anketaSaId!!.upisana=1
@@ -38,17 +36,25 @@ object TakeAnketaRepository {
 
     suspend fun getPoceteAnkete() : List<AnketaTaken>?{
         return withContext(Dispatchers.IO){
-            var db = AppDatabase.getInstance(context!!)
+            var db = AppDatabase.getInstance(AnketaRepository.context!!)
             if (MainActivity.connection){
 
-                var poceteSaServisa = getPoceteAnketeSaServisa()
+                /*var poceteSaServisa = getPoceteAnketeSaServisa()
 
                 if(poceteSaServisa!=null){
-                    for(poceta in poceteSaServisa){
-                        db.anketaTakenDao().insertAll(poceta)
-                    }
+                  for (poceta in poceteSaServisa)
+                      db.anketaTakenDao().insertAll(poceta)
                 }
                 return@withContext poceteSaServisa
+*/
+                var poceteSaServisa = ApiAdapter.retrofit.getPoceteAnkete().body()
+                if(poceteSaServisa!=null){
+                    for(poc in poceteSaServisa) db.anketaTakenDao().insertAll(poc)
+                }
+                if(poceteSaServisa==null || (poceteSaServisa!=null && poceteSaServisa.isEmpty()))
+                    return@withContext null
+                else return@withContext poceteSaServisa
+
             }else{
                 var izBaze = db.anketaTakenDao().getPocete()
                 return@withContext izBaze
