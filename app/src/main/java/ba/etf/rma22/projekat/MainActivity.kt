@@ -23,6 +23,8 @@ import ba.etf.rma22.projekat.data.repositories.*
 import ba.etf.rma22.projekat.view.*
 import ba.etf.rma22.projekat.viewmodel.AnketaListViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
@@ -47,8 +49,11 @@ class MainActivity : AppCompatActivity() {
 
         val payload = intent.getStringExtra("payload")
         if(payload !=null) {
-            val toast = Toast.makeText(this, payload, Toast.LENGTH_SHORT)
-            toast.show()
+            GlobalScope.launch {
+                AccountRepository.postaviHash(payload)
+            }
+        /*val toast = Toast.makeText(this, payload, Toast.LENGTH_SHORT)
+            toast.show()*/
         }
 
         viewPager = findViewById(R.id.pager)
